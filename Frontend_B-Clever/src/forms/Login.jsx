@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import cmlogo from '../images/cmlogo.jpg'
+import { useSelector } from 'react-redux'
 
 const Login = () => {
+  const kid = useSelector((state) => state.kidReducer)
+  console.log("inside of login component", sentences)
   
 return (
 
