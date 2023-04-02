@@ -1,12 +1,23 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// library imports
+import { CurrencyDollarIcon } from "@heroicons/react/24/solid"
+// import { useNavigate } from 'react-router-dom'
+// import { useDispatch, useSelector } from 'react-redux'
+
+// import { ProtectedComponent } from './ProtectedComponent'
+// import { useLoginMutation } from '../services/auth'
+// import type { LoginRequest } from '../services/auth'
+import { Link, Form } from 'react-router-dom'
 import cmlogo from '../images/cmlogo.jpg'
 import { useSelector } from 'react-redux'
+import { useGetKidsByIdQuery } from "../services/kids"
 
 const Login = () => {
-  const kid = useSelector((state) => state.kidReducer)
-  console.log("inside of login component", sentences)
-  
+  const kid = useSelector((state) => state.kidsReducer)
+  console.log("inside of login component", kid)
+  const [show, setShow] = React.useState(false)
+  const handleClick = () => setShow(!show)
+  //call function getKidsById on form submission
 return (
 
 <div className="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
@@ -15,12 +26,12 @@ return (
       <img className="mx-auto h-12 w-auto" src={cmlogo} alt={cmlogo}/>
       <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Login</h2>      
     </div>
-    <form className="mt-8 space-y-6" action="#" method="POST">
+    <Form className="mt-8 space-y-6" action="useGetKidsByIdQuery" method="post">
       <input type="hidden" name="remember" value="true"/>
       <div className="-space-y-px rounded-md shadow-sm">
         <div>
           <label htmlFor="Kid-Name" className="sr-only">Kid Name</label>
-          <input id="kid-name" name="kid" type="text" autoComplete="kid" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Name"/>
+          <input id="kid-name" name="kid" type="text" autoComplete="kid" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder={kid.name}/>
         </div>
         <div>
           <label htmlFor="password" className="sr-only">Password</label>
@@ -49,7 +60,7 @@ return (
           Login
         </button>
       </div>
-    </form>
+    </Form>
   </div>
 </div>
   )

@@ -1,4 +1,5 @@
-// import { createReducer } from '@reduxjs/toolkit' 
+import { createSlice} from '@reduxjs/toolkit' 
+
 const initialState = [
   {id: 1, expression: "21 + 43",}, {id: 2, expression: "17 + 13",}, {id: 3, expression: "23 + 12", 
   }, {id: 4, expression: "13 + 56",}, {id: 5, expression: "49 + 9",}, {id: 6, expression: "36 + 14", 
@@ -12,4 +13,5 @@ const initialState = [
 
 })
 
-export default quizReducer
+export const { login, logout, signup } = quizSlice.actions
+export default quizSlice.reducer

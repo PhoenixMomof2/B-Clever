@@ -1,5 +1,5 @@
 class KidsController < ApplicationController
-  skip_before_action :authorize, only: :create
+  skip_before_action :authorize, only: [:create, :index, :show]
 
   #SignUp
   def create
@@ -10,6 +10,10 @@ class KidsController < ApplicationController
 
   def show
     render json: current_kid, status: :ok
+  end
+
+  def index
+    render json: Kid.all, status: :ok
   end
 
   private
