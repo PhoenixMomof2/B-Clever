@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :kids
   resources :quizzes
+  
   # Sessions
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
