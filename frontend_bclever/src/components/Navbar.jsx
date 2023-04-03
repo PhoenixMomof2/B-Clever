@@ -14,7 +14,7 @@ const user = {
 const navigation = [
   { name: 'Main', to: '/', current: true },
   { name: 'Kids List', to: '/kids', current: false },
-  { name: 'Profile', to: '/me', current: false },
+  { name: 'Quiz', to: '/settings', current: false },
   { name: 'Login', to: '/login', current: false },
   { name: 'Sign Up', to: '/signup', current: false },
 ]

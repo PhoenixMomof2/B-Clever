@@ -6,6 +6,7 @@ export default {
   content: [
     '.src/**/*.{html,js,jsx,jpg}',
     './**/*.{html,js,jsx,jpg}',
+    './node_modules/flowbite/**/*.js'
   ],
   theme: {
     extend: {
@@ -18,6 +19,7 @@ export default {
       require('@tailwindcss/typography'),
       require('@tailwindcss/forms'),
       require('@tailwindcss/aspect-ratio'),
+      require('flowbite')
       // Custom styles added here
-    ],   
+    ]
 }

@@ -3,18 +3,18 @@ class SessionsController < ApplicationController
 
   # Login
   def create    
-    user = User.find_by(username: params[:username])
-    if user&.authenticate(params[:password])
-      session[:user_id] = user.id
-      render json: user, status: 201
+    kid = Kid.find_by(name: params[:name])
+    if kid&.authenticate(params[:password])
+      session[:kid_id] = kid.id
+      render json: kid, status: 201
     else
-      render json: { errors: "Invalid Username or Password" }, status: 401
+      render json: { errors: "Invalid Kid Name or Password" }, status: 401
     end
   end
 
   # Logout
   def destroy
-    session.delete :user_id
+    session.delete :kid_id
     head :no_content
   end
 end
