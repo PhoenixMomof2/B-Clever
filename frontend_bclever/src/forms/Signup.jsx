@@ -2,42 +2,71 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { headers } from "../context/Globals";
 import cmlogo from '../images/cmlogo.jpg'
+import { useSelector, useDispatch } from "react-redux"
+import { ActionCreators } from '../redux/action/kidsAction';
+import { signupKid } from '../redux/action/kidsAction'
+import { setErrors, clearErrors } from '../redux/action/errorsAction'
 
 const Signup = () => {
-  const [name, setName] = useState("")
-  const [password, setPassword] = useState("")
-  const [passwordConfirmation, setPasswordConfirmation] = useState("")
-  const [age, setAge] = useState("")
-  const [grade, setGrade] = useState("")
-  const [avatar, setAvatar] = useState("")
   const navigate = useNavigate()
-
+  const dispatch = useDispatch()
+  
+  const initialState = {
+    kid: {
+      name: '',
+      age: '',
+      avatar: '',
+      grade: '',
+      password: '',
+      passwordConfirmation: ''
+    }, 
+    formSubmitted: false
+  }
+  submitForm = async (event) => {
+    setState({ submitted: true });
+    dispatch(ActionCreators.formSubmissionStatus(true));
+    const kid = state.kid;
+    if (!kid.errors) {
+      user.avatar = kid.avatar;
+    }
+    event.preventDefault();
+    if (validateForm(state.errors) && kid && kid.avatar) {
+      console.info('Valid Form')
+      dispatch(ActionCreators.createNewKid(kid));
+      history.push('/confirm')
+    } else {
+      console.log('Invalid Form')
+    }
+  }
+  
+  
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("signup clicked")
   }
-  //   fetch("/signup", {
-  //     method: "POST",
-  //     headers,
-  //     body: JSON.stringify({
-  //       name,
-  //       password,
-  //       password_confirmation: passwordConfirmation,
-  //       age,
-  //       grade,
-  //       avatar,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((kid) => {
-  //       if (!kid.errors) {
-  //         signup(kid);
-  //         navigate("/me");
-  //       } else {
-  //         const errorLis = kid.errors.map((e, ind) => <li key={ind}>{e}</li>);
-  //         setErrors(errorLis);
-  //       }
-  //     });
+    fetch("/signup", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        name,
+        password,
+        password_confirmation: passwordConfirmation,
+        age,
+        grade,
+        avatar,
+      }),
+    })
+      .then((res) => res.json())
+      .then((kid) => {
+        if (!kid.errors) {
+          dispatch(signupKid(kid))
+        
+        } else {
+          dispatch(setErrors(data.errors))
+          navigate("/me")  
+        }
+      });
   //   //clear form
   //   // setUsername("");
   //   // setPassword("");
@@ -47,12 +76,12 @@ const Signup = () => {
   //   // setAvatar("")
   // };
 
-  // useEffect(() => {
-  //   return () => {
-  //     setErrors([]);
-  //   };
-  // }, [setErrors]);
-
+  
+  useEffect(() => {
+    return () => {
+      dispatch(clearErrors())
+    };
+  }, []);
 return (
 
 <div className="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">

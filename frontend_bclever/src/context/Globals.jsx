@@ -1,5 +1,22 @@
 export const headers = {
-  "Content-Type": "application/json",
+  "Accept": "application/json",
+  "Content-Type": "application/json"
 }
 
-export const url = 'http://localhost:3000'
+export const updateResource = (collection, updatedItem) => {
+  return collection.map(item => {
+    if(updatedItem.id === item.id) {
+      return updatedItem;
+    } else {
+      return item;
+    }
+  })
+}
+
+export const updateResourceCollection = (object, key, collection) => {
+  return { ...object, [key]: collection };
+}
+
+export const addResource = (collection, addedItem) => {
+  return [...collection, addedItem];
+}

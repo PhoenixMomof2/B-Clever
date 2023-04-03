@@ -1,42 +1,46 @@
 import { createBrowserRouter, RouterProvider,  } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import Login from "./forms/Login"
 import Signup from "./forms/Signup"
 import Main from "./pages/Main.jsx"
 import KidsList from "./pages/KidsList"
 import Settings from "./pages/Settings"
 // import Profile from "./layouts/Profile"
-import Error from "./pages/Error"
+import NotFound from "./pages/NotFound"
+// import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { loadKids } from './redux/action/kidsAction'
  
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Main />,
-      errorElement: <Error />,
+      errorElement: <NotFound />,
       // loader: mainLoader,
       children: [
         {        
           index: true,
           path: "/settings",
           element: <Settings />,
-          errorElement: <Error />,
+          errorElement: <NotFound />,
           // action: 
         },
         {        
           path: "/signup",
           element: <Signup />,
-          errorElement: <Error />,
+          errorElement: <NotFound />,
           // action:
         },
         {        
           path: "/kids",
           element: <KidsList />,
-          errorElement: <Error />,
+          errorElement: <NotFound />,
           // action: 
         },
         {        
           path: "/login",
           element: <Login />,
-          errorElement: <Error />,
+          errorElement: <NotFound />,
           // action: login 
         },
         {
@@ -48,6 +52,10 @@ import Error from "./pages/Error"
   ])
 
   const App = () => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+      dispatch(loadKids())      
+    },[dispatch])
 
     return (
       <div className="">

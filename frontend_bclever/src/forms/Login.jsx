@@ -2,46 +2,47 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { headers } from "../context/Globals";
 import cmlogo from '../images/cmlogo.jpg'
+import { useSelector, useDispatch } from 'react-redux';
+import { loginKid } from '../redux/action/kidsAction';
+import { setErrors, clearErrors } from '../redux/action/errorsAction'
 
 const Login = () => {
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
-  // const { login, setErrors, errors } = useContext(KidContext)
+  const current = useSelector(store => store.kidsReducer.currentKid)
+  const loggedIn = useSelector(store => store.kidsReducer.loggedIn)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   function handleSubmit(e) {
     e.preventDefault()
     
     console.log("login clicked")
-    // fetch("/login", {
-    //   method: "POST",
-    //   headers,
-    //   body: JSON.stringify({
-    //     name,
-    //     password,
-    //   }),
-    // }).then((res) => {
-    //   if (res.ok) {
-    //     res.json().then((kid) => {
-    //       login(kid)
-    //       navigate("/me")
-    //     });
-    //   } else {
-    //     res.json().then((err) => {          
-    //       setErrors(err.errors)
-    //     });
-    //   }
-    // });
+    fetch("/login", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        name,
+        password,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        dispatch(loginKid(current))
+      } else {
+        dispatch(setErrors((data.errors)))
+        navigate("/me")        
+      }
+    });
     // // clear form
     // setName("")
     // setPassword("")
   }
-
-  // useEffect(() => {
-  //   return () => {
-  //     setErrors([])
-  //   }
-  // }, [setErrors])
+  useEffect(() => {
+      return () => {
+        dispatch(clearErrors())
+      };
+    }, []);
+  
 return (
     <div className="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">

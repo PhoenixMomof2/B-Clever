@@ -22,17 +22,30 @@ const Settings = () => {
   }, [step]);
 
   return (
-    <div className="quiz">
-      {step === 1 && <Start />}
-      {step === 2 && <Question />}
-      {step === 3 && (
-        <End
-          data={quizData.data}
-          time={time}
-          onAnswersCheck={() => setShowModal(true)}
-        />
-      )}
-    </div>
+    <React.Fragment>   
+      <div className="min-h-full inline-block">   
+        <header className="bg-white shadow">
+            <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+              <h1 className="text-3xl font-bold tracking-tight text-gray-900">MATH QUIZ</h1>
+            </div>
+          </header>
+          <main>
+            <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+              <div className="border-t border-gray-200">
+                {step === 1 && <Start />}
+                {step === 2 && <Question />}
+                {step === 3 && (
+                  <End
+                    data={quizData.data}
+                    time={time}
+                    onAnswersCheck={() => setShowModal(true)}
+                  />
+                )}
+              </div> 
+            </div>
+          </main>   
+      </div>   
+    </React.Fragment>    
   );
 };
 
