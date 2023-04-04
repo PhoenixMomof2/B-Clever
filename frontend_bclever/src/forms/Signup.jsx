@@ -3,67 +3,43 @@ import { useNavigate, Link } from "react-router-dom";
 import { headers } from "../context/Globals";
 import cmlogo from '../images/cmlogo.jpg'
 import { useSelector, useDispatch } from "react-redux"
-import { ActionCreators } from '../redux/action/kidsAction';
-import { signupKid } from '../redux/action/kidsAction'
+import { signupKid } from '../redux/action/authAction';
 import { setErrors, clearErrors } from '../redux/action/errorsAction'
 
 const Signup = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  
-  const initialState = {
-    kid: {
-      name: '',
-      age: '',
-      avatar: '',
-      grade: '',
-      password: '',
-      passwordConfirmation: ''
-    }, 
-    formSubmitted: false
-  }
-  submitForm = async (event) => {
-    setState({ submitted: true });
-    dispatch(ActionCreators.formSubmissionStatus(true));
-    const kid = state.kid;
-    if (!kid.errors) {
-      user.avatar = kid.avatar;
-    }
-    event.preventDefault();
-    if (validateForm(state.errors) && kid && kid.avatar) {
-      console.info('Valid Form')
-      dispatch(ActionCreators.createNewKid(kid));
-      history.push('/confirm')
-    } else {
-      console.log('Invalid Form')
-    }
-  }
-  
-  
-  
+  const [name, setName] = useState("")
+  const [age, setAge] = useState("")
+  const [grade, setGrade] = useState("")
+  const [avatar, setAvatar] = useState("")
+  const [password, setPassword] = useState("")
+  const [passwordConfirmation, setPasswordConfirmation] = useState("")
+       
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("signup clicked")
-  }
+
+    const currentKidData = {
+      name,
+      age,
+      grade,
+      avatar,
+      password,
+      password_confirmation: passwordConfirmation,
+    }
+  
     fetch("/signup", {
       method: "POST",
       headers,
-      body: JSON.stringify({
-        name,
-        password,
-        password_confirmation: passwordConfirmation,
-        age,
-        grade,
-        avatar,
-      }),
+      body: JSON.stringify(currentKidData),
     })
       .then((res) => res.json())
       .then((kid) => {
         if (!kid.errors) {
-          dispatch(signupKid(kid))
-        
+          dispatch(signupKid(kid))        
         } else {
-          dispatch(setErrors(data.errors))
+          dispatch(setErrors(kid.errors))
           navigate("/me")  
         }
       });
@@ -75,13 +51,14 @@ const Signup = () => {
   //   // setGrade("")
   //   // setAvatar("")
   // };
-
+  }
   
   useEffect(() => {
     return () => {
       dispatch(clearErrors())
     };
   }, []);
+  
 return (
 
 <div className="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">

@@ -47,3 +47,4 @@ group :development do
 end
 
 gem 'cancancan'
+gem 'byebug', '~> 9.0', '>= 9.0.5'

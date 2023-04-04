@@ -6,8 +6,9 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 
 import quizReducer from "./quizReducer"
-import errorsReducer from './errorsReducer'
-import { signupReducer, kidsReducer } from "../reducer/kidsReducer";
+import errorsReducer from "../reducer/errorsReducer"
+import authReducer from "../reducer/authReducer";
+import kidsReducer from "../reducer/kidsReducer";
 
 const reducers = persistReducer(
   { storage: storage, key: "a27" },
@@ -15,7 +16,7 @@ const reducers = persistReducer(
     quizReducer,
     errorsReducer,
     kidsReducer,
-    signupReducer
+    authReducer
   })
 );
 

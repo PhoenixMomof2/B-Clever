@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider,  } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Login from "./forms/Login"
 import Signup from "./forms/Signup"
 import Main from "./pages/Main.jsx"
@@ -7,10 +7,10 @@ import KidsList from "./pages/KidsList"
 import Settings from "./pages/Settings"
 // import Profile from "./layouts/Profile"
 import NotFound from "./pages/NotFound"
-// import { useSelector } from "react-redux"
 import { useEffect } from "react"
 import { loadKids } from './redux/action/kidsAction'
- 
+import { loadCurrentKid } from './redux/action/authAction'
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -53,9 +53,17 @@ import { loadKids } from './redux/action/kidsAction'
 
   const App = () => {
     const dispatch = useDispatch()
+    // const kid = useSelector((state) => state.currentKid)
+
     useEffect(() => {
-      dispatch(loadKids())      
+      dispatch(loadKids())    
+      dispatch(loadCurrentKid()) 
     },[dispatch])
+  
+    // useEffect(() => {
+    //   dispatch(loadCurrentKid())      
+    // },[dispatch])
+
 
     return (
       <div className="">

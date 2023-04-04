@@ -3,33 +3,35 @@ import { Link, useNavigate } from 'react-router-dom'
 import { headers } from "../context/Globals";
 import cmlogo from '../images/cmlogo.jpg'
 import { useSelector, useDispatch } from 'react-redux';
-import { loginKid } from '../redux/action/kidsAction';
+import { loginCurrentKid } from '../redux/action/authAction';
 import { setErrors, clearErrors } from '../redux/action/errorsAction'
 
 const Login = () => {
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
-  const current = useSelector(store => store.kidsReducer.currentKid)
-  const loggedIn = useSelector(store => store.kidsReducer.loggedIn)
+  const { currentKid } = useSelector(store => store.authReducer)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   function handleSubmit(e) {
     e.preventDefault()
+    const data = {
+      name,
+      password,
+    }
     
     console.log("login clicked")
+
     fetch("/login", {
       method: "POST",
       headers,
-      body: JSON.stringify({
-        name,
-        password,
-      }),
-    }).then((res) => {
+      body: JSON.stringify(data),
+      }).then((res) => {
       if (res.ok) {
-        dispatch(loginKid(current))
+        const current = {name, password}
+        dispatch(loginCurrentKid(current))
       } else {
-        dispatch(setErrors((data.errors)))
+        dispatch(setErrors((res.errors)))
         navigate("/me")        
       }
     });

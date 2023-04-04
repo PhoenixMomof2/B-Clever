@@ -14,38 +14,16 @@ export const loadKids = () => {
   }
 } 
 
-export const loginKid = (current) => {
- 
-  return dispatch => {
-    // asynchronous calls
-    fetch('/me')
-    .then(res => res.json())
-    .then(data => {
-      const action = ({ type: "LOGIN", payload: data })
-      dispatch(action)
-    })
-  }
-} 
-
-export const signupKid = (data) => {
- 
-  return dispatch => {
-    // asynchronous calls
-    fetch('/me')
-    .then(res => res.json())
-    .then(data => {
-      const action = ({ type: "SIGNUP", payload: data })
-      dispatch(action)
-    })
-  }
-} 
-
-export const ActionCreators = {
-  createNewKid: (kid) => ({ type: "ADD_KID", payload: { kid } }),
-
-  updateKidAvatar: (avatar) => ({ type: "UPDATE_AVATAR", payload: { avatar } }),
-
-  updateKid: (kid) => ({ type: "UPDATE_USER", payload: { kid } }),
-
-  formSubmissionStatus: (status) => ({ type: "FORM_SUBMISSION_STATUS", payload: { status }}),
-}
+// export const loadUsers = (loggedIn, setLoading) => {
+//   return dispatch => {
+//     if (loggedIn){
+//       fetch('/users')
+//       .then(res => res.json())
+//       .then(data => {
+//         const action = { type: "LOAD_USERS", payload: data }
+//       })
+//       setLoading(false)
+//       dispatch(action)
+//     }
+//   }
+// }
