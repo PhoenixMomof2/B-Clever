@@ -7,12 +7,17 @@ const initialState = {
 const authReducer = (state=initialState, action) => {
 
   switch(action.type) {
-    case "LOAD_CURRENT_KID":
+    case "LOAD_KIDS":
       return {
-        ...state, 
-        currentKid: action.payload, 
-        loggedIn: true
-    }
+        ...state,
+        kids: action.payload          
+    }    
+    case "LOGIN":
+      return {
+        ...state,
+        currentKid: action.payload,
+        loggedIn: true          
+    } 
     case "ADD_KID":
       return {
         ...state, 
@@ -26,16 +31,10 @@ const authReducer = (state=initialState, action) => {
         currentKid: action.payload,
         loggedIn: true          
     }          
-    case "LOGIN":
-      return {
-        ...state,
-        currentKid: action.payload,
-        loggedIn: true          
-      }      
     case "LOGOUT":
       return {
         ...state,
-        currentKid: null,
+        currentKid: initialState.currentKid, // or = null
         loggedIn: false,       
       };
     default: 

@@ -1,7 +1,13 @@
-const errorsReducer = (state=[], action) => {
+const initialState = {
+  errors: []
+}
+
+const errorsReducer = (state=initialState, action) => {
   switch(action.type){
     case "SET_ERRORS":
-      return action.payload
+      return { ...state,
+        errors: action.payload
+      }      
     case "CLEAR_ERRORS":
       return []
     default:

@@ -1,49 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { headers } from "../context/Globals";
+import { useNavigate } from 'react-router-dom'
 import cmlogo from '../images/cmlogo.jpg'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginCurrentKid } from '../redux/action/authAction';
-import { setErrors, clearErrors } from '../redux/action/errorsAction'
+import { clearErrors } from '../redux/action/errorsAction'
 
 const Login = () => {
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
-  const { currentKid } = useSelector(store => store.authReducer)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   function handleSubmit(e) {
     e.preventDefault()
-    const data = {
-      name,
-      password,
-    }
-    
-    console.log("login clicked")
-
-    fetch("/login", {
-      method: "POST",
-      headers,
-      body: JSON.stringify(data),
-      }).then((res) => {
-      if (res.ok) {
-        const current = {name, password}
-        dispatch(loginCurrentKid(current))
-      } else {
-        dispatch(setErrors((res.errors)))
-        navigate("/me")        
-      }
-    });
-    // // clear form
-    // setName("")
-    // setPassword("")
+    dispatch(loginCurrentKid({name, password}, navigate))
+    console.log("login clicked")    
   }
   useEffect(() => {
       return () => {
         dispatch(clearErrors())
       };
-    }, []);
+    },[dispatch]);
   
 return (
     <div className="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">

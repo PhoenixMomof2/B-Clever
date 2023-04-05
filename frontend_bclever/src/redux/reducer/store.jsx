@@ -8,14 +8,12 @@ import { persistReducer } from "redux-persist";
 import quizReducer from "./quizReducer"
 import errorsReducer from "../reducer/errorsReducer"
 import authReducer from "../reducer/authReducer";
-import kidsReducer from "../reducer/kidsReducer";
 
 const reducers = persistReducer(
   { storage: storage, key: "a27" },
   combineReducers({
     quizReducer,
     errorsReducer,
-    kidsReducer,
     authReducer
   })
 );

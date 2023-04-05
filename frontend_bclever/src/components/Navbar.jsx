@@ -1,18 +1,14 @@
 import { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import phoenix from '../images/phoenix.jpg'
-
-const user = {
-  name: 'Kandis',
-  email: 'kandis@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutCurrentKid } from '../redux/action/authAction'
 
 const navigation = [
   { name: 'Main', to: '/', current: true },
+  { name: 'Profile', to: '/profile', current: false },
   { name: 'Kids List', to: '/kids', current: false },
   { name: 'Quiz', to: '/settings', current: false },
   { name: 'Login', to: '/login', current: false },
@@ -24,6 +20,16 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+const dispatch = useDispatch()
+const navigate = useNavigate()
+const {loggedIn, currentKid} = useSelector(store => store.authReducer)
+
+  function handleLogout(e) {
+    e.preventDefault()
+    dispatch(logoutCurrentKid(currentKid, navigate))
+    console.log("You are now logged out.")    
+  }
+
   return (
     <div className="min-h-full">
        <Disclosure as="nav" className="bg-gray-800">
@@ -106,33 +112,34 @@ export default function Navbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                          to="#"
+                          to="/profile"
                           className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            {user.name} Profile
+                            Profile
                           </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                          to="#"
+                          to="/settings"
                           className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Settings
                           </Link>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
+                      {loggedIn ? <Menu.Item>
                         {({ active }) => (
                           <Link
-                          to="#"
+                          to="/home"
                           className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          onClick={handleLogout}
                           >
-                            Sign out
+                            Logout
                           </Link>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> : null}
                     </Menu.Items>
                   </Transition>
                 </Menu>

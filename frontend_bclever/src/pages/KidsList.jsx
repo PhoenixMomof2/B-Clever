@@ -1,10 +1,7 @@
-import { useSelector, useDispatch } from "react-redux";
-import { PaperClipIcon } from '@heroicons/react/20/solid'
-import { Link } from 'react-router-dom'
+import { useSelector } from "react-redux"
 
 const KidsList = () => {
-    const dispatch = useDispatch();
-    const kids = useSelector(store => store.kidsReducer.kids);
+    const kids = useSelector(store => store.authReducer.kids);
 
     return (
       <div className="inline-block overflow-hidden bg-white shadow sm:rounded-lg">

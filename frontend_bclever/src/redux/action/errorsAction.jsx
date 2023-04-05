@@ -1,11 +1,11 @@
-export const setErrors = errors => {
+export const setErrors = (errors) => {
   return {
     type: "SET_ERRORS",
     payload: errors
   }
 }
 
-export const clearErrors = ([]) => {
+export const clearErrors = () => {
   return {
     type: "CLEAR_ERRORS"
   }
