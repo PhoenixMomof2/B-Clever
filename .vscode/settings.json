@@ -3,13 +3,24 @@
     "-webkit-appearance",
     "bclever",
     "cmlogo",
+    "continously",
     "flowbite",
     "headlessui",
     "heroicons",
+    "Nunito",
     "persistor",
     "reduxjs",
     "Signup",
+    "tada",
     "tailwindcss",
     "textareas"
-  ]
+  ],
+  "cSpell.customDictionaries": {
+    "custom-dictionary-workspace": {
+      "name": "custom-dictionary-workspace",
+      "path": "${workspaceFolder:B-Clever}/.cspell/custom-dictionary-workspace.txt",
+      "addWords": true,
+      "scope": "workspace"
+    }
+  }
 }

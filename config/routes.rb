@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :kids
+  resources :parents
+  resources :allowances
   resources :quizzes
+  resources :choices
   
   # Sessions
   post "/login", to: "sessions#create"

@@ -1,28 +1,29 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require('tailwindcss/plugin')
-const defaultTheme = require('tailwindcss/defaultTheme')
-
-export default {
+module.exports = {
   content: [
-    '.src/**/*.{html,js,jsx,jpg}',
-    './**/*.{html,js,jsx,jpg}',
-    './node_modules/flowbite/**/*.js'
+    "./src/**/*.{html,js}",
+    "./**/*.{html,js}"
   ],
   theme: {
     extend: {
+      colors: {
+        primary: '#FF6363',
+        secondary: {
+          100: '#E2E2D5',
+          200: '#888883'
+        }
+      },
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-      },
-      gridTemplateRows: {
-        '[auto,auto,1fr]': 'auto auto 1fr',
-      },
+        body: ['Nunito']
+      }
     },
   },
-  plugins: [    
-      require('@tailwindcss/typography'),
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/aspect-ratio'),
-      require('flowbite')
-      // Custom styles added here
-    ]
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+    require('flowbite')
+  // Custom styles added here],
+  ],
 }
+

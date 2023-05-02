@@ -8,7 +8,7 @@ import quizData from "../data/quiz.json";
 
 let interval;
 
-const Settings = () => {
+const MultiChoiceQuiz = () => {
   const dispatch = useDispatch();
   const { step, answers } = useSelector((state) => state?.quizReducer);
   console.log(step);
@@ -49,4 +49,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default MultiChoiceQuiz;

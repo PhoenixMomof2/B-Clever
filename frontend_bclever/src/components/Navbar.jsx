@@ -10,7 +10,7 @@ const navigation = [
   { name: 'Main', to: '/', current: true },
   { name: 'Profile', to: '/profile', current: false },
   { name: 'Kids List', to: '/kids', current: false },
-  { name: 'Quiz', to: '/settings', current: false },
+  { name: 'Quiz', to: '/quiz', current: false },
   { name: 'Login', to: '/login', current: false },
   { name: 'Sign Up', to: '/signup', current: false },
 ]
@@ -122,10 +122,10 @@ const {loggedIn, currentKid} = useSelector(store => store.authReducer)
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                          to="/settings"
+                          to="/quiz"
                           className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            Settings
+                            MultiChoiceQuiz
                           </Link>
                         )}
                       </Menu.Item>

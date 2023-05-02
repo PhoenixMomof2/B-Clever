@@ -4,7 +4,7 @@ import Login from "./forms/Login"
 import Signup from "./forms/Signup"
 import Main from "./pages/Main.jsx"
 import KidsList from "./pages/KidsList"
-import Settings from "./pages/Settings"
+import MathQuiz from "./pages/MathQuiz"
 import Profile from "./layouts/Profile"
 import NotFound from "./pages/NotFound"
 import { useEffect } from "react"
@@ -19,8 +19,8 @@ import { loadKids, loadCurrentKid } from './redux/action/authAction'
       children: [
         {        
           index: true,
-          path: "/settings",
-          element: <Settings />,
+          path: "/quiz",
+          element: <MathQuiz />,
           errorElement: <NotFound />,
           // action: 
         },
