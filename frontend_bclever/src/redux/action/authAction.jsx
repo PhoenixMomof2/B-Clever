@@ -28,7 +28,7 @@ export const loadCurrentKid = () => {
           const action = { type: "LOGIN", payload: data }
           console.log(data, "Current Kid")
           dispatch(action)
-        }else{
+        } else {
           dispatch(setErrors(data.errors))
         }
       })   

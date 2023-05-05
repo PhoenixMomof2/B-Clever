@@ -11,6 +11,7 @@ const navigation = [
   { name: 'Profile', to: '/profile', current: false },
   { name: 'Kids List', to: '/kids', current: false },
   { name: 'Quiz', to: '/quiz', current: false },
+  { name: 'Random Quiz', to: '/set_quiz', current: false },
   { name: 'Login', to: '/login', current: false },
   { name: 'Sign Up', to: '/signup', current: false },
 ]

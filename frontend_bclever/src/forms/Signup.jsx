@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import cmlogo from '../images/cmlogo.jpg'
 import { useDispatch } from "react-redux"
 import { loginCurrentKid, signupKid } from '../redux/action/authAction';
@@ -30,7 +30,7 @@ const Signup = () => {
         dispatch(clearErrors())
         console.log("signup clicked")    
       };
-    }, []);
+    }, [dispatch]);
       
 return (
 

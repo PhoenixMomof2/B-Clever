@@ -1,90 +1,10 @@
-// import React, { useState } from "react"
-
-// const MathQuiz = () => {
-//   const [num1, setNum1] = useState(0);
-//   const [num2, setNum2] = useState(0);
-//   const [sum, setSum] = useState(0);
-//   const [score, setScore] = useState(0);
-//   const generateQuestion = () => {
-//     setNum1(Math.ceil(Math.random() * 10));
-//     setNum2(Math.ceil(Math.random() * 10));
-//   };
-//   const submit = (e) => {
-//     e.preventDefault();
-//     const formValid = +sum >= 0;
-//     if (!formValid) {
-//       return;
-//     }
-//     if (+num1 + +num2 === +sum) {
-//       setScore((score) => score + 1);
-//     }
-//     generateQuestion();
-//   };
-
-//   return (
-//     <div className="App">
-//       <form onSubmit={submit}>
-//         <div>
-//           <h1>Addition Quiz</h1>
-//           <h2>Score: {score}</h2> 
-//           <div>
-//             <h2>
-//               {num1}
-//               Expression: 20 + 20
-//             </h2>
-//             <ul>
-//               <li>40</li>
-//               <li>30</li>
-//               <li>100</li>
-//               <li>20</li>
-//             </ul>
-//           </div>
-//           {/* <input value={sum} onChange={(e) => setSum(e.target.value)} /> */}
-//         </div>
-//         <button type="submit">check</button>
-//       </form>
-//       <button type="button" onClick={generateQuestion}>
-//         start game
-//       </button>
-//     </div>
-//   );
-// }
-
-// export default MathQuiz
 import React from 'react';
+import Expression from './Expression'
 import ReactDOM from 'react-dom/client' 
 
 const TIME = 30; // Initial game duration, in seconds
 
-class Expression extends React.PureComponent {
-  
-  componentDidUpdate(prevProps) {
-    console.log(prevProps)
-    const node = ReactDOM.findDOMNode(this.ref);
-    if(this.props.transitioning) {
-      node.classList.add('ease-in duration-300 ...');
-    }
-    else {
-      node.classList.remove('ease-in duration-300 ...');
-    }
-  }
-  
-  render() {
-    const {from, to} = this.props;
-    return (
-      <div className="transition duration-150 ease-out md:ease-in flex h-32 justify-center" ref={ref => this.ref = ref}>
-        <div className="h-24 w-36 transition duration-150 ease-out md:ease-in flex justify-items-center">
-          <div className="text-2xl hover:shadow-inner transform hover:scale-125 hover:bg:opacity-50 transition ease-out duration-300">{from}</div>
-          <div className="text-2xl border-dark  border-3 border-dashed w-24 h-24 btn">?</div>
-        </div>
-        <div className="transition duration-150 ease-out md:ease-in flex h-24 w-36 justify-center">
-          <div className="text-2xl hover:shadow-inner transform hover:scale-125 hover:bg:opacity-50 transition ease-out duration-300">{to}</div>
-          <div className="text-2xl border-dark border-3 border-dashed w-24 h-24 btn">?</div>
-        </div>
-      </div>
-    );
-  }
-}
+
 
 class Timer extends React.PureComponent {
   
@@ -123,7 +43,7 @@ class Timer extends React.PureComponent {
     const {endTime} = this.props;
     const {m, s} = this.state;
     const remaining = Math.floor((endTime - Date.now()) / 1000);
-
+    
     if(remaining !== m*6 + s) {
       this.setState(this.secondsToTimeObject(remaining));
     }
@@ -138,17 +58,17 @@ class Timer extends React.PureComponent {
     const remaining = m*60 + s;
     return (
       <div className={`timer ${remaining < 5 && remaining > 0? 'animated bounceIn red': ''}`} ref={ref => this.ref = ref}>{m > 9 ? '' : '0'}{m} : {s > 9 ? '' : '0'}{s}</div>
-    );
+      );
+    }
   }
-}
-
-class Header extends React.PureComponent {
   
-  constructor(props) {
-    super(props);
+  class Header extends React.PureComponent {
     
-    this.state = {
-      score: 0,
+    constructor(props) {
+      super(props);
+      
+      this.state = {
+        score: 0,
       change: 0
     };
   }
@@ -174,7 +94,7 @@ class Header extends React.PureComponent {
         const node = ReactDOM.findDOMNode(this.change);
         node.classList.remove('hidden');
         node.className +=
-          change > 0 ? ' btn choice-positive fadeOutUp' : ' btn choice-negative fadeOutDown';
+        change > 0 ? ' btn choice-positive fadeOutUp' : ' btn choice-negative fadeOutDown';
       }
     }, 0);
   }
@@ -215,7 +135,7 @@ class MultipleChoice extends React.PureComponent {
       <div className="flex justify-items-center p-6 bg-yellow-300">
         {values.map(res => (
           <div key={res} res={res} className={`divide-y choice w-20 h-20 quiz-btn animated ${selected === res ? (correct ? 'tada choice-positive divide-y' : 'choice-negative divide-y h-20 w-20 quiz-btn wobble') : ''}`} onClick={() => onClick(res)}>{res}</div>
-        ))}
+          ))}
       </div>
     );
   }
@@ -225,7 +145,7 @@ class Badge extends React.PureComponent {
   render() {
     const {score} = this.props;
     return (
-    <div className='badge'>
+      <div className='badge'>
   <div className='score'>{score}</div>
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
@@ -333,8 +253,8 @@ class MathQuiz extends React.PureComponent {
   
   shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
   }
@@ -374,7 +294,7 @@ class MathQuiz extends React.PureComponent {
       });
     }, 1500);
   };
-
+  
   handleOnTimerEnd = () => {
     this.setState({showSummary: true});
   }
@@ -392,7 +312,7 @@ class MathQuiz extends React.PureComponent {
   
   render() {
     const {prev, next, status, selected, showSummary, endTime} = this.state;
-
+    
     return (      
       <div className="rounded bg-gray-400 p-5">
         <header className="pb-2">
@@ -419,3 +339,56 @@ class MathQuiz extends React.PureComponent {
 
 export default MathQuiz
 
+// import React, { useState } from "react"
+
+// const MathQuiz = () => {
+//   const [num1, setNum1] = useState(0);
+//   const [num2, setNum2] = useState(0);
+//   const [sum, setSum] = useState(0);
+//   const [score, setScore] = useState(0);
+//   const generateQuestion = () => {
+//     setNum1(Math.ceil(Math.random() * 10));
+//     setNum2(Math.ceil(Math.random() * 10));
+//   };
+//   const submit = (e) => {
+//     e.preventDefault();
+//     const formValid = +sum >= 0;
+//     if (!formValid) {
+//       return;
+//     }
+//     if (+num1 + +num2 === +sum) {
+//       setScore((score) => score + 1);
+//     }
+//     generateQuestion();
+//   };
+
+//   return (
+//     <div className="App">
+//       <form onSubmit={submit}>
+//         <div>
+//           <h1>Addition Quiz</h1>
+//           <h2>Score: {score}</h2> 
+//           <div>
+//             <h2>
+//               {num1}
+//               Expression: 20 + 20
+//             </h2>
+//             <ul>
+//               <li>40</li>
+//               <li>30</li>
+//               <li>100</li>
+//               <li>20</li>
+//             </ul>
+//           </div>
+//           {/* <input value={sum} onChange={(e) => setSum(e.target.value)} /> */}
+//         </div>
+//         <button type="submit">check</button>
+//       </form>
+//       <button type="button" onClick={generateQuestion}>
+//         start game
+//       </button>
+//     </div>
+//   );
+// }
+
+// export default MathQuiz

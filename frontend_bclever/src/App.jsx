@@ -9,6 +9,7 @@ import Profile from "./layouts/Profile"
 import NotFound from "./pages/NotFound"
 import { useEffect } from "react"
 import { loadKids, loadCurrentKid } from './redux/action/authAction'
+import QuestionCard from "./pages/QuestionCard"
 
   const router = createBrowserRouter([
     {
@@ -21,6 +22,12 @@ import { loadKids, loadCurrentKid } from './redux/action/authAction'
           index: true,
           path: "/quiz",
           element: <MathQuiz />,
+          errorElement: <NotFound />,
+          // action: 
+        },
+        {        
+          path: "/set_quiz",
+          element: <QuestionCard />,
           errorElement: <NotFound />,
           // action: 
         },

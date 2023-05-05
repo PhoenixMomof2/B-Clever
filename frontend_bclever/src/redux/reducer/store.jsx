@@ -2,21 +2,17 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { composeWithDevTools } from '@redux-devtools/extension'
-import storage from "redux-persist/lib/storage";
-import { persistReducer } from "redux-persist";
 
-import quizReducer from "./quizReducer"
+import quizReducer from "../reducer/quizReducer"
 import errorsReducer from "../reducer/errorsReducer"
 import authReducer from "../reducer/authReducer";
 
-const reducers = persistReducer(
-  { storage: storage, key: "a27" },
+const reducers = 
   combineReducers({
     quizReducer,
     errorsReducer,
     authReducer
   })
-);
 
 let middleware = [];
 if (process.env.NODE_ENV === "development") {

@@ -1,3 +1,5 @@
 class Quiz < ApplicationRecord
-  has_many :choices
+  validates :expression, presence: true
+
+  has_many :choices  
 end

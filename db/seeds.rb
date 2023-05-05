@@ -12,7 +12,15 @@ Kid.create([
   {name: "Gavin", password: "player5", age: 8, avatar:"W'Kabi", grade: "2", wallet: 200.00 },
   {name: "Izzie", password: "player6", age: 7, avatar:"Okoye", grade: "K", wallet: 200.00 },
   ])
+Parent.create([
+  {name: "Kandis", age: 39, state: "Virginia"},
+  {name: "Kara", age: 39, state: "Maryland"},
+  {name: "Tyshelle", age: 35, state: "Maryland"},
+  {name: "Tineisha", age: 35, state: "Maryland"},
+  {name: "Gara", age: 42, state: "Maryland"},
+  {name: "Alisia", age: 44, state: "Georgia"},
 
+])
 Quiz.create([
   {id: 1, expression: "21 + 43",}, {id: 2, expression: "17 + 13",}, {id: 3, expression: "23 + 12", 
   }, {id: 4, expression: "13 + 56",}, {id: 5, expression: "49 + 9",}, {id: 6, expression: "36 + 14", 

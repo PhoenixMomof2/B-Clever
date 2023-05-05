@@ -3,6 +3,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.question-card{
+  @apply container flex-auto bg-red-600 mx-auto px-20 shadow-md 
+}
+
+.question-text{
+  @apply 
+}
+
+.final-results{
+  @apply 
+}
+
 .card{
   @apply bg-white rounded overflow-hidden shadow-md relative
 }

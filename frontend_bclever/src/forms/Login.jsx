@@ -16,6 +16,7 @@ const Login = () => {
     dispatch(loginCurrentKid({name, password}, navigate))
     console.log("login clicked")    
   }
+  
   useEffect(() => {
       return () => {
         dispatch(clearErrors())

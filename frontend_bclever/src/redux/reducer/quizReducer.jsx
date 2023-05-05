@@ -1,42 +1,31 @@
-import {QUIZ_START , QUIZ_RESET , QUIZ_NEXT,QUIZ_SUBMIT, QUIZ_PREV , QUIZ_TIMEOUT} from '../constant/quizConstant'
+export const formatTime = time => {
+    if (time < 60) {
+      return time < 10 ? `0${time}s` : `${time}s`;
+    } else {
+      return Math.floor(time / 60) + 'm' + (time % 60) + 's';
+    }
+  } 
 
 const initialState = {
-    step : 1,
-    activeQuestion: 0,
-    answers: [],
-    time: 60
+    questions: [],
+    question: {}
 }
 
-const quizReducer = (state = initialState , action) =>{
-    const {type , payload} = action
-    switch (type) {
-        case QUIZ_START:
-            return {
-                ...state,step:2 , time: payload
-            }
-        case QUIZ_NEXT:
-            return{
-                ...state,answers: [...payload],activeQuestion: state?.activeQuestion+1
-            }
-        case QUIZ_SUBMIT:
-            return{
-                ...state,step:3,answers:[...payload?.answers] , time: payload?.time
-            }
-        case QUIZ_RESET:
-            return{
-                ...state,step:1,activeQuestion:0,answers:[], time: 60
-            }
-        case QUIZ_PREV:
-            return{
-                ...state,activeQuestion:state?.activeQuestion-1
-            }
-        case QUIZ_TIMEOUT:
-            return{
-                ...state, time: 0,step:3
-            }
+const quizReducer = (state=initialState, action) => {
+    switch(action.type) {
+        case "LOAD_QUIZ":
+          return {
+            ...state,
+            questions: action.payload      
+        }
+        case "LOAD_QUESTION":
+          return {
+            ...state,
+            question: action.payload      
+        }     
         default:
-            return state;
+            return state
     }
 }
 
-export default quizReducer;
+export default quizReducer
