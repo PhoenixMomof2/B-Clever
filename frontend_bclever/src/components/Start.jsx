@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startQuiz } from "../redux/action/quizAction";
+import { startQuestion } from "../redux/action/quizAction";
 const Start = () => {
   const dispatch = useDispatch();
   // const {time} = useSelector(state => state.quizReducer)
   const [minute, setMinute] = useState(1);
   const [second, setSecond] = useState(0);
   const [time, setTime] = useState(60);
-  const handleQuizStart = () => {
-    dispatch(startQuiz(time));
+  const handleQuestionStart = () => {
+    dispatch(startQuestion(time));
   };
   useEffect(() => {
     if (minute > 59) {
@@ -30,7 +30,7 @@ const Start = () => {
     <div className="startBox">
       <div>
         <div>
-          <h1>Start the Quiz</h1>
+          <h1>Start the Question</h1>
           <p>Good luck!</p>
           <p>Time:&nbsp;&nbsp;{time}sec</p>
           <section>
@@ -53,7 +53,7 @@ const Start = () => {
               sec
             </label>
           </section>
-          <button className="startButton" onClick={handleQuizStart}>
+          <button className="startButton" onClick={handleQuestionStart}>
             START
           </button>
         </div>

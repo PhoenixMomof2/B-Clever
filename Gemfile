@@ -48,3 +48,6 @@ end
 gem "active_model_serializers"
 gem 'cancancan'
 gem 'byebug', '~> 9.0', '>= 9.0.5'
+gem 'faker'
+gem 'awesome_print'
+gem 'money-rails'

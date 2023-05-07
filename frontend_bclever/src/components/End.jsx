@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { resetQuiz } from "../redux/action/quizAction";
+import { resetQuestion } from "../redux/action/quizAction";
 import { formatTime } from "../utils/index";
 import quizData from "../data/quiz.json";
 import Modal from "./Modal";
@@ -21,7 +21,7 @@ const End = () => {
     setCorrectAnswers(correct);
   }, []);
   const handleReset = () => {
-    dispatch(resetQuiz());
+    dispatch(resetQuestion());
   };
   return (
     <div className="endBox">

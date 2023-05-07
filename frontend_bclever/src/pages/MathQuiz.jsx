@@ -178,7 +178,7 @@ class Summary extends React.PureComponent {
   }
 }
 
-class MathQuiz extends React.PureComponent {
+class MathQuestion extends React.PureComponent {
   
   constructor(props) {
     super(props);
@@ -316,7 +316,7 @@ class MathQuiz extends React.PureComponent {
     return (      
       <div className="rounded bg-gray-400 p-5">
         <header className="pb-2">
-          <h1 className="text-3xl font-bold tracking-tight text-center text-gray-900">Math Quiz</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-center text-gray-900">Math Question</h1>
           <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8 bg-blue-200 justify-center">
             <main>
               <div className="text-center mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
@@ -337,11 +337,11 @@ class MathQuiz extends React.PureComponent {
   }
 }
 
-export default MathQuiz
+export default MathQuestion
 
 // import React, { useState } from "react"
 
-// const MathQuiz = () => {
+// const MathQuestion = () => {
 //   const [num1, setNum1] = useState(0);
 //   const [num2, setNum2] = useState(0);
 //   const [sum, setSum] = useState(0);
@@ -366,7 +366,7 @@ export default MathQuiz
 //     <div className="App">
 //       <form onSubmit={submit}>
 //         <div>
-//           <h1>Addition Quiz</h1>
+//           <h1>Addition Question</h1>
 //           <h2>Score: {score}</h2> 
 //           <div>
 //             <h2>
@@ -391,4 +391,4 @@ export default MathQuiz
 //   );
 // }
 
-// export default MathQuiz
+// export default MathQuestion

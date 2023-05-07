@@ -1,5 +1,5 @@
 class ChoiceSerializer < ActiveModel::Serializer
-  attributes :id, :answer, :correct, :quiz_id
+  attributes :id, :answer, :correct, :question_id
 
-  belongs_to :quiz
+  belongs_to :question
 end

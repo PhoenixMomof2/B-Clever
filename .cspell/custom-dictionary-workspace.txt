@@ -1,1 +1,6 @@
 # Custom Dictionary Words
+actioncable
+chartjs
+dropdownlist
+excalidraw
+mbaku

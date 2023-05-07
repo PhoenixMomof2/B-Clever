@@ -1,3 +1,65 @@
+Question.create!([
+  {id: 1, expression: "21 + 43", choices: [
+    Choice.create(answer: 64, correct: true, question_id: 1),
+    Choice.create(answer: 74, correct: false, question_id: 1),
+    Choice.create(answer: 54, correct: false, question_id: 1),
+    Choice.create(answer: 62, correct: false, question_id: 1),
+    ]},  
+  {id: 2, expression: "17 + 13", choices: [
+    Choice.create(answer: 30, correct: true, question_id: 2),
+    Choice.create(answer: 20, correct: false, question_id: 2),
+    Choice.create(answer: 29, correct: false, question_id: 2),
+    Choice.create(answer: 27, correct: false, question_id: 2),
+    ]}, 
+  {id: 3, expression: "23 + 12", choices: [
+    Choice.create(answer: 35, correct: true, question_id: 3),
+    Choice.create(answer: 32, correct: false, question_id: 3),
+    Choice.create(answer: 33, correct: false, question_id: 3),
+    Choice.create(answer: 36, correct: false, question_id: 3),
+    ]}, 
+  {id: 4, expression: "13 + 56", choices: [
+    Choice.create(answer: 69, correct: true, question_id: 4),  
+    Choice.create(answer: 59, correct: false, question_id: 4),
+    Choice.create(answer: 67, correct: false, question_id: 4),
+    Choice.create(answer: 62, correct: false, question_id: 4),
+    ]}, 
+  {id: 5, expression: "49 + 9", choices: [
+  Choice.create(answer: 58, correct: true, question_id: 5),
+  Choice.create(answer: 48, correct: false, question_id: 5),
+  Choice.create(answer: 46, correct: false, question_id: 5),
+  Choice.create(answer: 38, correct: false, question_id: 5),
+    ]}, 
+  {id: 6, expression: "36 + 14", choices: [
+    Choice.create(answer: 50, correct: true, question_id: 6), 
+    Choice.create(answer: 40, correct: false, question_id: 6),
+    Choice.create(answer: 52, correct: false, question_id: 6),
+    Choice.create(answer: 51, correct: false, question_id: 6),
+    ]}, 
+  {id: 7, expression: "16 + 52", choices: [
+    Choice.create(answer: 68, correct: true, question_id: 7),
+    Choice.create(answer: 68, correct: false, question_id: 7),
+    Choice.create(answer: 68, correct: false, question_id: 7),
+    Choice.create(answer: 68, correct: false, question_id: 7),
+    ]}, 
+  {id: 8, expression: "73 + 11", choices: [
+  Choice.create(answer: 84, correct: true, question_id: 8),
+  Choice.create(answer: 80, correct: false, question_id: 8),
+  Choice.create(answer: 81, correct: false, question_id: 8),
+  Choice.create(answer: 74, correct: false, question_id: 8),
+    ]}, 
+  {id: 9, expression: "86 + 13", choices: [
+    Choice.create(answer: 99, correct: true,question_id: 9),
+    Choice.create(answer: 95, correct: false, question_id: 9),
+    Choice.create(answer: 100, correct: false, question_id: 9),
+    Choice.create(answer: 97, correct: false, question_id: 9),
+    ]}, 
+  {id: 10, expression: "15 + 31", choices: [
+    Choice.create(answer: 46, correct: true, question_id: 10),
+    Choice.create(answer: 36, correct: false, question_id: 10),
+    Choice.create(answer: 26, correct: false, question_id: 10),
+    Choice.create(answer: 56, correct: false, question_id: 10),
+    ]}
+])    
 /* div {
   user-select: none;
 }

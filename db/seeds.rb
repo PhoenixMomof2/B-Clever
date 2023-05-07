@@ -1,233 +1,50 @@
-puts "🌱 Seeding..."
+puts "🌱 Seeding B-Clever data..."
 
-puts "Deleting Kid data...."
+puts "Deleting B-Clever data...."
 Kid.destroy_all
+Parent.destroy_all
+Allowance.destroy_all
+Question.destroy_all
+Choice.destroy_all
+
 
 puts "Creating kids..."
-Kid.create([
-  {name: "Kal", password: "player1", age: 8, avatar:"T'Challa", grade: "2", wallet: 200.00 },
-  {name: "Miles", password: "player2", age: 6, avatar:"M'Baku", grade: "1", wallet: 200.00 }, 
-  {name: "Reagan", password: "player3", age: 6, avatar:"Nakia", grade: "K", wallet: 200.00 },
-  {name: "Kali", password: "player4", age: 7, avatar:"Shuri", grade: "2", wallet: 200.00 },
-  {name: "Gavin", password: "player5", age: 8, avatar:"W'Kabi", grade: "2", wallet: 200.00 },
-  {name: "Izzie", password: "player6", age: 7, avatar:"Okoye", grade: "K", wallet: 200.00 },
-  ])
-Parent.create([
-  {name: "Kandis", age: 39, state: "Virginia"},
-  {name: "Kara", age: 39, state: "Maryland"},
-  {name: "Tyshelle", age: 35, state: "Maryland"},
-  {name: "Tineisha", age: 35, state: "Maryland"},
-  {name: "Gara", age: 42, state: "Maryland"},
-  {name: "Alisia", age: 44, state: "Georgia"},
-
-])
-Quiz.create([
-  {id: 1, expression: "21 + 43",}, {id: 2, expression: "17 + 13",}, {id: 3, expression: "23 + 12", 
-  }, {id: 4, expression: "13 + 56",}, {id: 5, expression: "49 + 9",}, {id: 6, expression: "36 + 14", 
-  }, {id: 7, expression: "16 + 52",}, {id: 8, expression: "73 + 11",}, {id: 9, expression: "86 + 13", 
-  }, {id: 10, expression: "15 + 31",}
-  ])
-
-Choice.create([
-  { 
-    answer: "64",
-    correct: true,
-    quiz_id: 1
-  },
-  { 
-    answer: "30",
-    correct: true,
-    quiz_id: 2
-  },
-  { 
-    answer: "35",
-    correct: true,
-    quiz_id: 3
-  },
-  { 
-    answer: "69",
-    correct: true,
-    quiz_id: 4
-  },
-  { 
-  answer: "58",
-  correct: true,
-  quiz_id: 5
-  },
-  { 
-  answer: "50",
-  correct: true,
-  quiz_id: 6
-  },
-  { 
-  answer: "68",
-  correct: true,
-  quiz_id: 7
-  },
-  { 
-  answer: "84",
-  correct: true,
-  quiz_id: 8
-  },
-  { 
-  answer: "99",
-  correct: true,
-  quiz_id: 9
-  },
-  { 
-  answer: "46",
-  correct: true,
-  quiz_id: 10
-  },{ 
-    answer: "74",
-    correct: false,
-    quiz_id: 1
-  },
-  { 
-    answer: "20",
-    correct: false,
-    quiz_id: 2
-  },
-  { 
-    answer: "32",
-    correct: false,
-    quiz_id: 3
-  },
-  { 
-    answer: "59",
-    correct: false,
-    quiz_id: 4
-  },
-  { 
-  answer: "58",
-  correct: false,
-  quiz_id: 5
-  },
-  { 
-  answer: "50",
-  correct: false,
-  quiz_id: 6
-  },
-  { 
-  answer: "68",
-  correct: false,
-  quiz_id: 7
-  },
-  { 
-  answer: "84",
-  correct: false,
-  quiz_id: 8
-  },
-  { 
-  answer: "99",
-  correct: false,
-  quiz_id: 9
-  },
-  { 
-  answer: "46",
-  correct: false,
-  quiz_id: 10
-  },
-  { 
-  answer: "54",
-  correct: false,
-  quiz_id: 1
-  },
-  { 
-  answer: "29",
-  correct: false,
-  quiz_id: 2
-  },
-  { 
-  answer: "33",
-  correct: false,
-  quiz_id: 3
-  },
-  { 
-  answer: "67",
-  correct: false,
-  quiz_id: 4
-  },
-  { 
-  answer: "58",
-  correct: false,
-  quiz_id: 5
-  },
-  { 
-  answer: "50",
-  correct: false,
-  quiz_id: 6
-  },
-  { 
-  answer: "68",
-  correct: false,
-  quiz_id: 7
-  },
-  { 
-  answer: "84",
-  correct: false,
-  quiz_id: 8
-  },
-  { 
-  answer: "99",
-  correct: false,
-  quiz_id: 9
-  },
-  { 
-  answer: "46",
-  correct: false,
-  quiz_id: 10
-  },
-  { 
-  answer: "62",
-  correct: false,
-  quiz_id: 1
-  },
-  { 
-  answer: "40",
-  correct: false,
-  quiz_id: 2
-  },
-  { 
-  answer: "36",
-  correct: false,
-  quiz_id: 3
-  },
-  { 
-  answer: "62",
-  correct: false,
-  quiz_id: 4
-  },
-  { 
-  answer: "58",
-  correct: false,
-  quiz_id: 5
-  },
-  { 
-  answer: "50",
-  correct: false,
-  quiz_id: 6
-  },
-  { 
-  answer: "68",
-  correct: false,
-  quiz_id: 7
-  },
-  { 
-  answer: "84",
-  correct: false,
-  quiz_id: 8
-  },
-  { 
-  answer: "99",
-  correct: false,
-  quiz_id: 9
-  },
-  { 
-  answer: "46",
-  correct: false,
-  quiz_id: 10
-  },
-])
-
+kal = Kid.create!(name: "Kal", password: "player1", age: 8, avatar: "tchalla.jpg", grade: "2", wallet: 200.00)
+miles = Kid.create!(name: "Miles", password: "player2", age: 6, avatar: "mbaku.jpg", grade: "1", wallet: 200.00)
+reagan = Kid.create!(name: "Reagan", password: "player3", age: 6, avatar: "nakia.jpg", grade: "K", wallet: 200.00)
+kali = Kid.create!(name: "Kali", password: "player4", age: 7, avatar: "shuri.jpg", grade: "2", wallet: 200.00)
+gavin = Kid.create!(name: "Gavin", password: "player5", age: 8, avatar: "wkabi.jpg", grade: "2", wallet: 200.00) 
+izzie = Kid.create!(name: "Izzie", password: "player6", age: 7, avatar: "okoye.jpg", grade: "K", wallet: 200.00)
+  
+puts "Creating parents..."
+kandis = Parent.create!(name: "Kandis", password: "parent1", age: 39, state: "Virginia")
+kara = Parent.create!(name: "Kara", password: "parent2", age: 39, state: "Maryland")
+tyshelle = Parent.create!(name: "Tyshelle", password: "parent3", age: 35, state: "Maryland")
+tineisha = Parent.create!(name: "Tineisha", password: "parent4", age: 35, state: "Maryland")
+gara = Parent.create!(name: "Gara", password: "parent5", age: 42, state: "Maryland")
+alisia = Parent.create!(name: "Alisia", password: "parent6", age: 44, state: "Georgia")
+    
+puts "Creating allowances..."
+Allowance.create!([{balance: 25.00, kid: kal, parent: kandis},
+  {balance: 25.00, kid: miles, parent: kara},
+  {balance: 15.00, kid: reagan, parent: tyshelle},
+  {balance: 35.00, kid: kali, parent: tineisha},
+  {balance: 50.00, kid: gavin, parent: gara},
+  {balance: 45.00, kid: izzie, parent: alisia}])
+  
+  puts "Creating questions..."
+  100.times do |index|
+    range = 1..100
+    random_number1 = Random.rand(range)
+    random_number2 = Random.rand(range)
+    total = random_number1 + random_number2
+    @question = Question.create(expression: "#{random_number1} + #{random_number2}")
+    total = random_number1 + random_number2
+  
+    answers = Array.new(3) {Random.rand(range)}
+    possible_choices = answers.map{|index| @question.choices.create(answer: Random.rand(range), correct: false)}
+    correct_answer = @question.choices.create(answer: total, correct: true)
+    possible_choices << correct_answer
+    end
+  puts "Created #{Question.count} questions"
 puts "Done seeding!"

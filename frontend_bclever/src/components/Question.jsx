@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  nextQuiz,
-  prevQuiz,
-  submitQuiz,
+  nextQuestion,
+  prevQuestion,
+  submitQuestion,
   timeOut,
 } from "../redux/action/quizAction";
 import quizData from "../data/quiz.json";
@@ -40,7 +40,7 @@ const Question = () => {
   };
   const handlePrev = () => {
     setError("");
-    dispatch(prevQuiz());
+    dispatch(prevQuestion());
   };
   const handleNext = (e) => {
     if (selected === "") {
@@ -52,7 +52,7 @@ const Question = () => {
       a: selected,
     };
     dispatch(
-      nextQuiz({
+      nextQuestion({
         answers: ans,
       })
     );
@@ -68,7 +68,7 @@ const Question = () => {
       return setError("Please select one option!");
     }
     dispatch(
-      submitQuiz({
+      submitQuestion({
         answers: [
           ...answers,
           (answers[activeQuestion] = {

@@ -2,11 +2,11 @@ import { createBrowserRouter, RouterProvider,  } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import Login from "./forms/Login"
 import Signup from "./forms/Signup"
-import Main from "./pages/Main.jsx"
+import Main from "./pages/Main"
 import KidsList from "./pages/KidsList"
-import MathQuiz from "./pages/MathQuiz"
-import Profile from "./layouts/Profile"
+import Wallet from "./layouts/Wallet"
 import NotFound from "./pages/NotFound"
+import Profile from "./pages/Profile"
 import { useEffect } from "react"
 import { loadKids, loadCurrentKid } from './redux/action/authAction'
 import QuestionCard from "./pages/QuestionCard"
@@ -18,39 +18,39 @@ import QuestionCard from "./pages/QuestionCard"
       errorElement: <NotFound />,
       // loader: mainLoader,
       children: [
-        {        
-          index: true,
-          path: "/quiz",
-          element: <MathQuiz />,
-          errorElement: <NotFound />,
-          // action: 
-        },
-        {        
-          path: "/set_quiz",
-          element: <QuestionCard />,
-          errorElement: <NotFound />,
-          // action: 
-        },
-        {        
-          path: "/profile",
+        {              
+          index: true,   
+          path: "me",
           element: <Profile />,
           errorElement: <NotFound />,
           // action:
         },
         {        
-          path: "/signup",
+          path: "wallet",
+          element: <Wallet />,
+          errorElement: <NotFound />,
+          // action: 
+        },
+        {        
+          path: "set_quiz",
+          element: <QuestionCard />,
+          errorElement: <NotFound />,
+          // action: 
+        },
+        {        
+          path: "signup",
           element: <Signup />,
           errorElement: <NotFound />,
           // action:
         },
         {        
-          path: "/kids",
+          path: "kids",
           element: <KidsList />,
           errorElement: <NotFound />,
           // action: 
         },
         {        
-          path: "/login",
+          path: "login",
           element: <Login />,
           errorElement: <NotFound />,
           // action: login 
@@ -68,7 +68,7 @@ import QuestionCard from "./pages/QuestionCard"
     },[dispatch])
 
     return (
-      <div className="">
+      <div>
         <RouterProvider router={router} />
       </div> 
     )

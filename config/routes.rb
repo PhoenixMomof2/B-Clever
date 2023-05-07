@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   resources :kids
   resources :parents
   resources :allowances
-  resources :quizzes
+  resources :questions
   resources :choices
   
-  # Quiz
-  get "/generate_expression", to: "quizzes#generate_expression"
-  get "/set_quiz", to: "quizzes#set_quiz"
+  # Question
+  get "/generate_expression", to: "questions#generate_expression"
+  get "/set_quiz", to: "questions#set_quiz"
   # Choices
   get "/random_choices", to: "choices#generate_choices"
   # Sessions

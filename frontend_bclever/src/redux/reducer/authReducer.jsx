@@ -1,6 +1,6 @@
 const initialState = {
   kids: [],
-  currentKid: null,
+  currentKid: {},
   loggedIn: false
 }
 

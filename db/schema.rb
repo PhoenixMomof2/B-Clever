@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_02_162354) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_06_184145) do
   create_table "allowances", force: :cascade do |t|
-    t.integer "balance"
+    t.float "balance"
     t.integer "kid_id"
     t.integer "parent_id"
     t.datetime "created_at", null: false
@@ -20,9 +20,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_162354) do
   end
 
   create_table "choices", force: :cascade do |t|
-    t.string "answer"
+    t.integer "answer"
     t.boolean "correct"
-    t.integer "quiz_id"
+    t.integer "question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,20 +33,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_162354) do
     t.integer "age"
     t.string "avatar"
     t.string "grade"
+    t.float "wallet"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "wallet"
   end
 
   create_table "parents", force: :cascade do |t|
     t.string "name"
+    t.string "password_digest"
     t.integer "age"
     t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "quizzes", force: :cascade do |t|
+  create_table "questions", force: :cascade do |t|
     t.string "expression"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
