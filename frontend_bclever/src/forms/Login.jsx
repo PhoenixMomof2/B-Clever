@@ -4,6 +4,7 @@ import cmlogo from '../images/cmlogo.jpg'
 import { useDispatch } from 'react-redux';
 import { loginCurrentKid } from '../redux/action/authAction';
 import { clearErrors } from '../redux/action/errorsAction'
+import Errors from '../errors/Errors';
 
 const Login = () => {
   const [name, setName] = useState("")
@@ -13,8 +14,7 @@ const Login = () => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    dispatch(loginCurrentKid({name, password}, navigate))
-    console.log("login clicked")    
+    dispatch(loginCurrentKid({name, password}, navigate))   
   }
   
   useEffect(() => {
@@ -54,7 +54,7 @@ return (
               Login
             </button>
           </div>
-          {/* <div>{errors}</div> */}
+          <Errors />
         </form>
       </div>
     </div>

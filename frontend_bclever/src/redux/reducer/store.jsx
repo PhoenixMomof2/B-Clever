@@ -5,20 +5,23 @@ import { composeWithDevTools } from '@redux-devtools/extension'
 
 import quizReducer from "../reducer/quizReducer"
 import errorsReducer from "../reducer/errorsReducer"
-import authReducer from "../reducer/authReducer";
+import authReducer from "../reducer/authReducer"
+import parentAuthReducer from "./parentAuthReducer";
 
-const reducers = 
-  combineReducers({
-    quizReducer,
-    errorsReducer,
-    authReducer
-  })
-
-let middleware = [];
-if (process.env.NODE_ENV === "development") {
-  middleware = [...middleware, thunk, logger];
-} else {
-  middleware = [...middleware, thunk];
-}
-
-export const store = createStore(reducers, {}, composeWithDevTools(applyMiddleware(...middleware)));
+  const reducer = 
+    combineReducers({
+      quizReducer,
+      errorsReducer,
+      authReducer,
+      parentAuthReducer
+    })
+  
+  let middleware = [];
+  if (process.env.NODE_ENV === "development") {
+    middleware = [...middleware, thunk, logger];
+  } else {
+    middleware = [...middleware, thunk];
+  }
+  const enhancer = composeWithDevTools(applyMiddleware(...middleware))
+  
+export const store = createStore(reducer, enhancer);

@@ -1,25 +1,14 @@
+import React, { useState } from 'react'
 import { setErrors } from './errorsAction'
 
-export const startQuiz = () => {
-  return dispatch => {
-    fetch('/generate_expression')
-    .then(res => res.json())
-    .then(data => {
-      if(!data.errors){
-      const action = ({ type: "LOAD_QUESTION", payload: data })
-      console.log(data, "startQuiz")
-      dispatch(action)
-      } else {
-      dispatch(setErrors(data.errors))
-      console.log(data.errors)
-      }
-    })
-  }
+export const VisibilityToggle = () => {
+  const [visible, setVisibility] = useState(false)
+  return setVisibility(true)
 }
 
 export const loadQuiz = () => {
   return dispatch => {
-    fetch('/set_quiz')
+    fetch('/new_quiz')
     .then(res => res.json())
     .then(data => {
       if(!data.errors){
@@ -33,3 +22,18 @@ export const loadQuiz = () => {
     })
   }
 }
+
+// export const startQuiz = () => {
+//   // start (false or true)
+//   // start interval and display quiz
+//   return startingSeconds--
+
+// } 
+
+export const goToNextQuestion = (time, score) => {
+  // questions.length 
+  return {
+    score,
+    time
+  }
+}  

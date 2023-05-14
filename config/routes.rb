@@ -5,20 +5,18 @@ Rails.application.routes.draw do
   resources :questions
   resources :choices
   
-  # Question
-  get "/generate_expression", to: "questions#generate_expression"
-  get "/set_quiz", to: "questions#set_quiz"
-  # Choices
-  get "/random_choices", to: "choices#generate_choices"
+  # Custom Question Routes
+  get "/new_quiz", to: "questions#new_quiz"
+  
   # Sessions
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+  post "/login_parent", to: "sessions#login_parent"
+  delete "/logout_parent", to: "sessions#logout_parent"
 
   # Users
   get "/me", to: "kids#show"
+  # get "/parent_profile", to:"parents#show"
   post "/signup", to: "kids#create"
-
-  # route to test your configuration
-  get '/hello', to: 'application#hello_world'
-
+  post "/signup_parent", to: "parents#create"
 end

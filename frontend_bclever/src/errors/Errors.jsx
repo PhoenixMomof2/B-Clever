@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux"
 
 const Errors = () => {
-  const errors = useSelector(store => store.errorsReducer)
-  const errorLis = errors.map((error, idx) => <li key={idx}>{ error }</li> )
+  const err = useSelector(store => store.errorsReducer)
+  console.log(err.errors)
+  const errorLis = err.errors.map((e, idx) => <li key={idx}>{ e }</li> )
+  
   return (
     <ul>
       { errorLis }

@@ -4,17 +4,26 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
   
-  before_action :authorize
+  before_action :authorize_kid
   
   def current_kid
-    @current_kid = Kid.find_by_id(session[:kid_id])
+    @current_kid = Kid.find_by_id(session[:kid_id])  
   end
 
+  # def current_parent
+  #   @current_parent = Parent.find_by_id(session[:parent_id])
+  # end
+
   private
-  def authorize
+  def authorize_kid
     @current_kid = Kid.find_by_id(session[:kid_id])
-    render json: { errors: ["Not Authorized"] }, status: :unauthorized unless @current_kid
+    render json: { errors: ["Kid Not Authorized"] }, status: :unauthorized unless @current_kid
   end
+
+  # def authorize_parent
+  #   @current_parent = Parent.find_by_id(session[:parent_id])
+  #   render json: { errors: ["Parent Not Authorized"] }, status: :unauthorized unless @current_parent
+  # end
 
   # Error handling methods
   def render_not_found_response

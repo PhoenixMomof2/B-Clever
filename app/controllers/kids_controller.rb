@@ -1,5 +1,5 @@
 class KidsController < ApplicationController
-  skip_before_action :authorize, only: [:create, :index]
+  skip_before_action :authorize_kid, only: :create
 
   #SignUp
   def create
@@ -19,6 +19,6 @@ class KidsController < ApplicationController
 
   private
   def kid_params
-    params.permit(:name, :password, :password_confirmation, :age, :avatar, :grade)
+    params.permit(:name, :password, :password_confirmation, :age, :avatar, :grade, :wallet)
   end
 end

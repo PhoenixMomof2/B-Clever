@@ -5,7 +5,7 @@ export default function NotFound() {
   console.error(error);
 
   return (
-    <div id="error-page">
+    <div className="w-full md:w-1/2 xl:w-1/3 p-6">
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
       <p>

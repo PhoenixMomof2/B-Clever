@@ -4,3 +4,6 @@ chartjs
 dropdownlist
 excalidraw
 mbaku
+nakia
+parent_profile
+toastify

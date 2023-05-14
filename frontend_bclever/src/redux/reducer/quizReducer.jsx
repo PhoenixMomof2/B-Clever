@@ -1,28 +1,36 @@
-export const formatTime = time => {
-    if (time < 60) {
-      return time < 10 ? `0${time}s` : `${time}s`;
-    } else {
-      return Math.floor(time / 60) + 'm' + (time % 60) + 's';
-    }
-  } 
-
-const initialState = {
-    questions: [],
-    question: {}
+const gameState = {
+  questions: [],   
+  markedAnswers: [],
+  currentQuestionIndex: 0
 }
-
-const quizReducer = (state=initialState, action) => {
+  // receiver of values (logic should be done in the components)
+const quizReducer = (state=gameState, action) => {
     switch(action.type) {
         case "LOAD_QUIZ":
           return {
             ...state,
-            questions: action.payload      
-        }
-        case "LOAD_QUESTION":
+            questions: action.payload
+        }  
+        case "START_QUIZ":
           return {
-            ...state,
-            question: action.payload      
-        }     
+            ...state,           
+            questions: action.payload,      
+            
+        }
+        case "NEXT_QUESTION":
+          return {
+            ...state, 
+            questions: action.payload,      
+            markedAnswers: action.payload.markedAnswers,
+            currentQuestionIndex: action.payload.currentQuestionIndex+1            
+        }
+        case "RESET_QUIZ":
+          return {
+            ...state, 
+            questions: [],
+            markedAnswers: [],
+            currentQuestionIndex: 0
+          }
         default:
             return state
     }

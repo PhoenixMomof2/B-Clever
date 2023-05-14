@@ -1,64 +1,45 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react'
-import { flushSync } from 'react-dom'
+import React, { useState, useRef } from "react";
+import { useSelector } from "react-redux";
+// import { goToNextQuestion } from "../redux/action/quizAction";
 
-const Question = ({question, totalQuestions, currentQuestion, setAnswer}) => {
-  const [selectedOption, setSelectedOption] = useState(null)
-  const timer = useRef(null)
-  const progressBar = useRef(null)
+const Question = () => {
+  // const dispatch = useDispatch()
+  // // const currentKid = useSelector(store => store.authReducer)
+  const { questions, currentQuestionIndex } = useSelector(gameState => gameState.quizReducer)
+  const startQuestion = questions[currentQuestionIndex]
+  const scoreRef = useRef(0)
+  const [score, setScore] = useState(scoreRef.current)
 
-  const nextQuestion = useCallback(() => {
-    if(timer.current){
-      clearTimeout(timer.current)
+  // helper functions
+  // ternary for points calculation
+  const optionClicked = (correct) => {
+    if (correct === true) {
+      setScore(score + 1)
+  //     dispatch(goToNextQuestion(scoreRef.current))
+  //     //check length of questions array (if index is at 30, dispatch "calculatedResult")
+  //     // redirect to results page, state can be used to tally and do updates to kid allowance
+  //     // return { allowance: score * 1.50, kid_id: currentKid.id }
+  //     // reducer is the more in depth version of updating state dispatch
+  //    } else {
+  //     setPoints(scoreRef.current + 0)
     }
-    flushSync(() => {
-      setAnswer(selectedOption)
-    })
-    setSelectedOption(null)
-  })
+  }
+  // set question to appear every 10 seconds max for 1 minute.  Calculate score hat
 
-  useEffect(() => {
-    progressBar.current.classList.remove("active")
-    setTimeout(() => {
-      progressBar.current.classList.add("active")
-    },0)
-    timer.current = setTimeout(nextQuestion, 10*1000) // 10 seconds
-    return nextQuestion
-  }, [nextQuestion])
-  
-  return (
-    <div className="question">
-      <div className="progress-bar" ref={progressBar}></div>
-      <div className="question-count">
-        <b> {currentQuestion} </b>
-        of 
-        <b> {totalQuestions} </b>
-      </div>
-      <div className="main">
-        <div className="title">
-          <span>Question:</span>
-          <p>{question.expression}</p>
-        </div>
-        <div className="options">
-          {
-            question.choices.map((choice, index) => {
-              return (
-                <div className={index === selectedOption ? "option active" : "option"} 
-                key={index}
-                onClick={()=>setSelectedOption(index)}
-                >
-                  {choice}
-                </div>
-              )
-            })
-          }
+  return (     
+    <>    
+      <div key={startQuestion.id} className="button inline-flex items-center rounded-lg bg-yellow-300 px-3">
+        <button className="inline-flex w-full justify-center rounded-full bg-purple-600 px-3 py-2 m-3text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">{startQuestion.expression}</button> <svg className="h-8 w-8 text-red-500"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="8" x2="20" y2="8" />  <line x1="4" y1="16" x2="20" y2="16" /></svg>
+        <div className="p-2">
+          {startQuestion.choices.map((c) => 
+            <button key={c.id} onClick={() => optionClicked(c.correct)} 
+            className="inline-flex w-full justify-center items-center rounded-full bg-green-600 px-3 py-2 m-3text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">
+              {c.answer}
+            </button>
+          )}
         </div>
       </div>
-      <div className="control">
-        <button onclick={nextQuestion}>
-          Next Question
-        </button>
-      </div>
-    </div>
+    </>
   )
 }
 

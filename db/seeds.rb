@@ -39,10 +39,9 @@ Allowance.create!([{balance: 25.00, kid: kal, parent: kandis},
     random_number2 = Random.rand(range)
     total = random_number1 + random_number2
     @question = Question.create(expression: "#{random_number1} + #{random_number2}")
-    total = random_number1 + random_number2
-  
+     
     answers = Array.new(3) {Random.rand(range)}
-    possible_choices = answers.map{|index| @question.choices.create(answer: Random.rand(range), correct: false)}
+    possible_choices = answers.map!{|answer| @question.choices.create(answer: answer, correct: false)}
     correct_answer = @question.choices.create(answer: total, correct: true)
     possible_choices << correct_answer
     end
