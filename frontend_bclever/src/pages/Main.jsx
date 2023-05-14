@@ -8,7 +8,7 @@ const Main = () => {
   return (
     <>
       <Navbar />
-      <main className="max-w-[1480px] w-full h-full m-auto flex justify-between items-center bg-slate-300">       
+      <main>       
         <Outlet />  
       </main>    
       <Footer />

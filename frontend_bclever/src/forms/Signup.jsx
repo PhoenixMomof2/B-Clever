@@ -4,7 +4,7 @@ import cmlogo from '../images/cmlogo.jpg'
 import { useDispatch } from "react-redux"
 import { loginCurrentKid, signupKid } from '../redux/action/authAction';
 import { clearErrors } from '../redux/action/errorsAction'
-import Errors from '../errors/Errors'
+// import Errors from '../errors/Errors'
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -83,11 +83,10 @@ return (
             Signup
           </button>
         </div>
-        <Errors />
+        {/* <Errors /> */}
       </form>
     </div>
   </div>
   )
 }
-
 export default Signup

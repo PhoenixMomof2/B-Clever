@@ -19,6 +19,7 @@ import QuizScreen from "./pages/QuizScreen"
 import Home from "./pages/Home"
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
+import About from "./pages/About"
 
   const router = createBrowserRouter([
     {
@@ -31,6 +32,12 @@ import 'react-toastify/dist/ReactToastify.css'
           index: true,   
           path: "*",
           element: <Home />,
+          errorElement: <NotFound />,
+          // action:
+        },
+        {              
+          path: "about",
+          element: <About />,
           errorElement: <NotFound />,
           // action:
         },

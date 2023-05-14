@@ -4,7 +4,7 @@ import cmlogo from '../images/cmlogo.jpg'
 import { useDispatch } from 'react-redux';
 import { loginCurrentKid } from '../redux/action/authAction';
 import { clearErrors } from '../redux/action/errorsAction'
-import Errors from '../errors/Errors';
+// import Errors from '../errors/Errors';
 
 const Login = () => {
   const [name, setName] = useState("")
@@ -54,7 +54,7 @@ return (
               Login
             </button>
           </div>
-          <Errors />
+          {/* <Errors /> */}
         </form>
       </div>
     </div>

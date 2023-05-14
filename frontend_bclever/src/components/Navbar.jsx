@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import CMLOGO_withName from '../images/CMLOGO_withName.jpg'
-// import nakia from '../images/nakia.jpg'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutCurrentKid } from '../redux/action/authAction'
-// import ParentNavbar from '../layouts/ParentNavbar'
-// import Home from '../pages/Home'
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false)
@@ -13,8 +9,7 @@ const Navbar = () => {
   
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const { currentKid } = useSelector(store => store.authReducer)
-	// const { parentLoggedIn } = useSelector(store => store.parentAuthReducer)
+	const { currentKid, loggedIn } = useSelector(store => store.authReducer)
 	
 	const logout = (e) => {
 			e.preventDefault()
@@ -22,24 +17,29 @@ const Navbar = () => {
 	}
 
   return (
-    <div className="w-full h-[86px] px-6 bg-blue-500 border-b">
+    <div className="w-full h-[96px] px-8 bg-blue-500 border-b">
       <div className="md:max-w-[1480px] max-w-[600px] w-full h-full m-auto flex justify-between items-center">
-      <img className="w-20 h-20" src={CMLOGO_withName} alt="B-Clever"/>
+      <div className="inline-flex gap-2 py-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="text-yellow-400 w-12 h-12">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+      </svg><span className="text-white mx-auto font-semibold text-3xl">B-Clever</span>
+      </div>
+
       <div className="hidden md:flex items-center">
-        <ul className="flex gap-4 text-white">
-          <li>Home</li>
-          <li>About</li>
-          <li>Explore</li>
+        <ul className="flex gap-4 text-white font-bold">
+          <li className="rounded-md bg-purple-400 p-2"><Link to="/home">Home</Link></li>
+          <li className="rounded-md bg-red-400 p-2"><Link to="/about">About</Link></li>
+          <li className="rounded-md bg-yellow-400 p-2"><Link to="/explore">Explore</Link></li>
         </ul>
       </div>
 
       <div className="hidden lg:flex gap-4">
-      <button className="flex justify-between rounded-md items-center bg-transparent px-3 bg-yellow-200 font-bold">
+      <Link to="/login" className="flex justify-between rounded-md items-center bg-transparent px-3 py-2 bg-yellow-200 font-bold">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
         <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
         </svg>
-        Login</button>
-        <button className="px-3 py-2 bg-green-300 rounded-md font-semibold">Sign Up</button>
+        Login</Link>
+        <Link to="/signup" className="px-3 py-2 bg-green-300 rounded-md font-semibold">Sign Up</Link>
       </div>
       <div className="md:hidden" onClick={handleClick}>
         {toggle ? (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -50,188 +50,24 @@ const Navbar = () => {
         </svg>)}
       </div>
       </div>
-      <div className={ toggle ? '' : 'hidden' }>
+      <div className={ toggle ? 'absolute z-10 p-4 bg-white w-full px-3 md:hidden' : 'hidden' }>
       <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Explore</li>
+          <li className="p-2 hover:bg-green-200"><Link to="/home">Home</Link></li>
+          <li className="p-2 hover:bg-green-200"><Link to="/about">About</Link></li>
+          <li className="p-2 hover:bg-green-200"><Link to="/explore">Explore</Link></li>
+          <div className="flex my-4 gap-4">
+            {loggedIn ? (<Link onClick={logout} to="/logout" className="flex justify-center rounded-md items-center bg-transparent px-3 py-2 bg-yellow-200 font-bold">Log Out</Link>) : (<Link to="/login" className="flex justify-center rounded-md items-center bg-transparent px-3 py-2 bg-yellow-200 font-bold">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+            </svg>
+            Login</Link>)}
+            
+            <Link to="/signup" className="px-3 py-2 bg-green-300 rounded-md font-semibold">Sign Up</Link>
+          </div>
         </ul>
       </div>
-    </div>
-    // <Disclosure as="nav" className="bg-blue-600">
-    //   {({ open }) => (
-    //     <>
-    //       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-    //         <div className="relative flex h-16 items-center justify-between">
-    //           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-    //             {/* Mobile menu button*/}
-    //             <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-    //               <span className="sr-only">Open main menu</span>
-    //               {open ? (
-    //                 <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-    //               ) : (
-    //                 <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-    //               )}
-    //             </Disclosure.Button>
-    //           </div>
-    //           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-    //             <div className="flex flex-shrink-0 items-center">
-    //               <img
-    //                 className="hidden h-8 w-auto lg:block"
-    //                 src={CMLOGO_withName}
-    //                 alt="B-Clever"
-    //               />
-    //             </div>
-    //             <div className="hidden sm:ml-6 sm:block">
-    //               <div className="flex space-x-4">
-    //                 {navigation.map((item) => (
-    //                   <Link
-    //                     key={item.name}
-    //                     to={item.to}
-    //                     className={classNames(
-    //                       item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-    //                       'rounded-md px-3 py-2 text-sm font-medium'
-    //                     )}
-    //                     aria-current={item.current ? 'page' : undefined}
-    //                   >
-    //                     {item.name}
-    //                   </Link>
-    //                 ))}
-    //               </div>
-    //             </div>
-    //           </div>
-    //           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                
-
-    //             {/* Profile dropdown */}
-    //             <Menu as="div" className="relative ml-3">
-    //               <div>
-    //                 <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-    //                   <span className="sr-only">Open user menu</span>
-    //                   <img
-    //                     className="h-8 w-8 rounded-full"
-    //                     src={nakia}
-    //                     alt=""
-    //                   />
-    //                 </Menu.Button>
-    //               </div>
-    //               <Transition
-    //                 as={Fragment}
-    //                 enter="transition ease-out duration-100"
-    //                 enterFrom="transform opacity-0 scale-95"
-    //                 enterTo="transform opacity-100 scale-100"
-    //                 leave="transition ease-in duration-75"
-    //                 leaveFrom="transform opacity-100 scale-100"
-    //                 leaveTo="transform opacity-0 scale-95"
-    //               >
-    //                 <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-    //                   <Menu.Item>
-    //                     {({ active }) => (
-    //                       <Link
-    //                         to="/wallet"
-    //                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-    //                       >
-    //                         B-Clever Wallets
-    //                       </Link>
-    //                     )}
-    //                   </Menu.Item>
-    //                   <Menu.Item>
-    //                     {({ active }) => (
-    //                       <Link
-    //                         to="/new_quiz"
-    //                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-    //                       >
-    //                         Earn Allowance
-    //                       </Link>
-    //                     )}
-    //                   </Menu.Item>
-    //                   <Menu.Item>
-    //                     {({ active }) => (
-    //                       <Link
-		// 											onClick={logout}
-    //                         to="/logout"
-    //                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-    //                       >
-    //                         Log out
-    //                       </Link>
-    //                     )}
-    //                   </Menu.Item>
-    //                 </Menu.Items>
-    //               </Transition>
-    //             </Menu>
-    //           </div>
-    //         </div>
-    //       </div>
-
-    //       <Disclosure.Panel className="sm:hidden">
-    //         <div className="space-y-1 px-2 pb-3 pt-2">
-    //           {navigation.map((item) => (
-    //             <Disclosure.Button
-    //               key={item.name}
-    //               as="a"
-    //               to={item.to}
-    //               className={classNames(
-    //                 item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-    //                 'block rounded-md px-3 py-2 text-base font-medium'
-    //               )}
-    //               aria-current={item.current ? 'page' : undefined}
-    //             >
-    //               {item.name}
-    //             </Disclosure.Button>
-    //           ))}
-    //         </div>
-    //       </Disclosure.Panel>
-    //     </>
-    //   )}
-    // </Disclosure>
+    </div>   
   )
 }
 export default Navbar
-	// create a conditional logout for parent or kid
-	
-  // return (	
-	// 	<>
-	// 	{ loggedIn ? (
-	// 		
-	// 					{/* <div className="text-right z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg focus:outline-none"> */}
-	// 						<ul className="list-reset flex lg:justify-items-end flex-1 md:flex-none items-center">
-	// 							<li className="flex-1 md:flex-none md:mr-3">
-	// 								<Link to="/signup" aria-label="Home"> Signup</Link>
-	// 							</li>
-	// 							<li className="flex-1 md:flex-none md:mr-3">
-	// 								<Link to="/login" aria-label="Home"> Login</Link>
-	// 							</li>
-	// 						</ul>
-	// 					{/* </div> */}
-	// 					{ loggedIn ? (
-	// 					<ul className="list-reset flex md:justify-items-end flex-1 md:flex-none items-center">
-	// 						<li className="flex-1 md:flex-none md:mr-3">
-	// 							<div className="relative inline-block">
-	// 								<span className="pr-2"><i className="em em-robot_face"></i></span> Hi, { loggedIn ? currentKid.name : "Clever Munchkin" }! 								
-	// 							</div>
-	// 						</li>
 
-	// 						<li className="flex-1 md:flex-none md:mr-3">
-	// 								<Link className="inline-block py-2 px-4 text-white no-underline" to="/wallet">My Wallet</Link>
-	// 						</li>
-	// 						<li className="flex-1 md:flex-none md:mr-3">
-	// 								<Link className="inline-block py-2 px-4 text-white no-underline" to="/me">Profile</Link>
-	// 						</li>
-	// 						<li className="flex-1 md:flex-none md:mr-3">
-	// 								<Link className="inline-block text-white no-underline hover:text-red-600 hover:text-underline py-2 px-4" to="/new_quiz">Earn Allowance</Link>
-	// 						</li>
-	// 						<li className="flex-1 md:flex-none md:mr-3">
-	// 							{ loggedIn ? (<Link to="/home" className="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block" onClick={logout}><i className="fas fa-sign-out-alt fa-fw"></i> Log Out</Link>	
-	// 							) : 
-	// 							(<Link to="/login" className="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block" ><i className="fas fa-sign-out-alt fa-fw"></i> Login</Link>)
-	// 							 }
-	// 						</li>
-	// 					</ul>) : null }
-	// 					{parentLoggedIn ? <ParentNavbar /> : null}
-	// 				</div>
-	// 			</div>
-	// 		</nav>			 
-	// 	) : (<Home />)}
-	// 	</>)
-	// }    
-	// export default Navbar	
