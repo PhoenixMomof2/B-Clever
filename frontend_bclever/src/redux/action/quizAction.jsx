@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { setErrors } from './errorsAction'
 
 export const VisibilityToggle = () => {
@@ -22,18 +22,3 @@ export const loadQuiz = () => {
     })
   }
 }
-
-// export const startQuiz = () => {
-//   // start (false or true)
-//   // start interval and display quiz
-//   return startingSeconds--
-
-// } 
-
-export const goToNextQuestion = (time, score) => {
-  // questions.length 
-  return {
-    score,
-    time
-  }
-}  

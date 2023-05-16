@@ -51,7 +51,7 @@ export const loginCurrentKid = (kid, navigate) => {
         const action = { type: "LOGIN", payload: data }
         dispatch(action)
         dispatch(clearErrors())
-        navigate("/home") 
+        navigate("/me") 
       }
     });  
   }
@@ -71,7 +71,7 @@ export const signupKid = (kid, navigate) => {
         } else {
         dispatch({ type: "SIGNUP", payload: data })
         dispatch({ type: "ADD_KID", payload: data }) 
-        navigate("/home") 
+        navigate("/me") 
       }
     })   
   }

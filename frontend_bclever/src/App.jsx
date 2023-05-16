@@ -20,6 +20,7 @@ import Home from "./pages/Home"
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
 import About from "./pages/About"
+import Explore from "./pages/Explore"
 
   const router = createBrowserRouter([
     {
@@ -58,6 +59,12 @@ import About from "./pages/About"
           element: <ParentList />,
           errorElement: <NotFound />,
           // action:
+        },
+        {        
+          path: "explore",
+          element: <Explore />,
+          errorElement: <NotFound />,
+          // action: 
         },
         {        
           path: "wallet",

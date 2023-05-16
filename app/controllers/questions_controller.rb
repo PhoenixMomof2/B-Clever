@@ -1,16 +1,17 @@
 class QuestionsController < ApplicationController
-  skip_before_action :authorize_kid, only: [:index, :new_quiz]
+  skip_before_action :authorize_kid, only: [:new_quiz]
+  skip_before_action :authorize_parent, only: [:new_quiz]
 
-  # GET /questions
-  def index
-    render json: Question.all
-  end
+  # # GET /questions
+  # def index
+  #   render json: Question.all
+  # end
 
-  # GET /questions/:id
-  def show
-    find_question
-    render json: @question
-  end
+  # # GET /questions/:id
+  # def show
+  #   find_question
+  #   render json: @question
+  # end
 
   # GET /new_quiz (get a random set of 30 questions)
   def new_quiz
