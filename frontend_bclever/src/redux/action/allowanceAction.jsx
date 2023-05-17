@@ -15,7 +15,7 @@ export const createAllowance = (newAllowance, navigate) => {
         if(data.errors) {
           dispatch(setErrors(data.errors));
         } else {
-          const action = ({ type: "CREATE_ALLOWANCE", payload: data })         
+          const action = { type: "CREATE_ALLOWANCE", payload: data }         
           console.log(data, "create allowance")
           dispatch(action)
           navigate('/me')

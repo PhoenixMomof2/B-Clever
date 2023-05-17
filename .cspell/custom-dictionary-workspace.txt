@@ -4,6 +4,7 @@ chartjs
 dropdownlist
 excalidraw
 mbaku
+moneyman
 nakia
 parent_profile
 toastify

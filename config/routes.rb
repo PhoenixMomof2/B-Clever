@@ -14,9 +14,11 @@ Rails.application.routes.draw do
   post "/login_parent", to: "sessions#login_parent"
   delete "/logout_parent", to: "sessions#logout_parent"
 
-  # Users
+  # Kids
   get "/me", to: "kids#show"
-  # get "/parent_profile", to:"parents#show"
   post "/signup", to: "kids#create"
+
+  # Parents
+  get "/parent_profile", to:"parents#show"
   post "/signup_parent", to: "parents#create"
 end

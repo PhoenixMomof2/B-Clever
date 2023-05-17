@@ -1,5 +1,5 @@
 class ParentsController < ApplicationController
-  skip_before_action :authorize_parent, only: [:create, :index]
+  # skip_before_action :authorize_parent, only: [:create, :index]
   skip_before_action :authorize_kid, only: [:create, :index, :show]
   
   #SignUp

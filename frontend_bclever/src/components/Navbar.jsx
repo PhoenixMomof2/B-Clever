@@ -29,7 +29,7 @@ const Navbar = () => {
 
       <div className="hidden md:flex items-center">
         <ul className="flex gap-4 text-white font-bold">
-          {loggedIn ? (<li className="rounded-md bg-purple-400 p-2"><Link to="/new_quiz">Earn Allowance</Link></li>) : (<li className="rounded-md bg-purple-400 p-2"><Link to="/home">Home</Link></li>)}
+          {loggedIn ? (<li className="rounded-md bg-purple-400 p-2"><Link to="/new_quiz">Earn Allowance</Link></li>) : (<li className="rounded-md bg-purple-400 p-2"><Link to="/">Home</Link></li>)}
           {loggedIn ? (<li className="rounded-md bg-red-400 p-2"><Link to="/me">My Wallet</Link></li>) : (<li className="rounded-md bg-red-400 p-2"><Link to="/about">About</Link></li>)}
           {loggedIn ? (<li className="rounded-md bg-yellow-400 p-2"><Link to="/wallet">Munchkins</Link></li>) : (<li className="rounded-md bg-yellow-400 p-2"><Link to="/explore">Explore</Link></li>)}        
         </ul>
@@ -54,7 +54,7 @@ const Navbar = () => {
       </div>
       <div className={ toggle ? 'absolute z-10 p-4 bg-white w-full px-3 md:hidden' : 'hidden' }>
       <ul>
-        {loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/new_quiz">Earn Allowance</Link></li>) : (<li className="p-2 hover:bg-green-200"><Link to="/home">Home</Link></li>)}
+        {loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/new_quiz">Earn Allowance</Link></li>) : (<li className="p-2 hover:bg-green-200"><Link to="/">Home</Link></li>)}
         {loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/me">My Wallet</Link></li>) : (<li className="p-2 hover:bg-green-200"><Link to="/about">About</Link></li>)}
         {loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/wallet">Munchkins</Link></li>) : (<li className="p-2 hover:bg-green-200"><Link to="/explore">Explore</Link></li>)}
           <div className="flex my-4 gap-4">

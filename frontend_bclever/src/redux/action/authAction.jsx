@@ -11,7 +11,7 @@ export const loadKids = () => {
     fetch('/kids')
     .then(res => res.json())
     .then(data => {
-      const action = ({ type: "LOAD_KIDS", payload: data })
+      const action = { type: "LOAD_KIDS", payload: data }
       dispatch(action)
     })
   }

@@ -5,8 +5,8 @@ import CMLOGO_withName from '../images/CMLOGO_withName.jpg'
 import { createAllowance } from '../redux/action/allowanceAction'
 
 const QuizScreen = () => {    
-  const [timeLeft, setTimeLeft] = useState(5)
-  const timeLeftRef = useRef(5)
+  const [timeLeft, setTimeLeft] = useState(10)
+  const timeLeftRef = useRef(10)
   const intervalIdRef = useRef(null)
   const [intervalId, setIntervalId] = useState(null)
 
@@ -17,7 +17,7 @@ const QuizScreen = () => {
   const { questions } = useSelector(gameState => gameState.quizReducer)
   const indexRef = useRef(0)
   const [idx, setIdx] = useState(0)
-  const [nextQuestion, setNextQuestion] = useState(questions[idx+1])
+  const [nextQuestion, setNextQuestion] = useState(questions[idx])
 
   const [started, setStarted] = useState(false)
   const [score, setScore] = useState(0)
@@ -31,80 +31,84 @@ const QuizScreen = () => {
   }    
 
   const countdown = () => {  
-    // console.log(timeLeftRef.current, "countdown")  
+    console.log(timeLeftRef.current, "countdown")  
     if (timeLeftRef.current > 0) {
       setTimeLeft(timeLeft => timeLeft - 1)
+    } else if (timeLeftRef.current === 0) {
+      console.log("time's up")
+      createAllowance(calculateAllowance(scoreRef.current))
+      setTimeLeft(0)
+      clearInterval(intervalIdRef.current)
+      setIntervalId(null)
     } else {
-      // scoreRef.current = score
-      // calculateAllowance(score)
       clearInterval(intervalIdRef.current)
       setIntervalId(null)
     }
     formatTime(timeLeftRef.current)
   }
   
+  
   useEffect(() => {
     timeLeftRef.current = timeLeft    
     intervalIdRef.current = intervalId
     indexRef.current = idx
     scoreRef.current = score
-    console.log(indexRef.current, "idx")
-    console.log(scoreRef.current, "score")
+    console.log(indexRef.current, "useEffect idx")
+    console.log(scoreRef.current, "useEffect score")
+    console.log(timeLeftRef.current, "useEffect timeLeft") 
   }, [timeLeft, intervalId, idx, score])
   // updates references when the state changes (must link references to the values)
   
   useEffect(() => {
     return () => {
       console.log("clean up", intervalId)
-      scoreRef.current = score
-      calculateAllowance(score)
       clearInterval(intervalId)}
-    }, [intervalId, score])
+    }, [intervalId])
     
     // create a check answer action that adds to t correct count (marked Answers)
     // create a tally score action
     // create an allowance calculator after quiz score tally ($1.50/correct answer)
     
-  const formatTime = (timeLeft) => {
-    let minutes = Math.floor(timeLeft / 60)
-    let seconds = Math.floor(timeLeft % 60)
-    return { minutes, seconds }
-  }
-  console.log(formatTime(timeLeft))
-  
-  const goToNextQuestion = () => {
-    setIdx(idx+1)
-    setNextQuestion(questions[idx])
-    console.log(nextQuestion, "nextQuestion")
-  }
-  
-  const optionClicked = (correct) => {
-    if (correct === true) {
-      setScore(score + 1)  
-      goToNextQuestion()
-      // dispatch(createAllowance())
-    } else {
-      goToNextQuestion()
-      setScore(score)
+    const formatTime = (timeLeft) => {
+      let minutes = Math.floor(timeLeft / 60)
+      let seconds = Math.floor(timeLeft % 60)
+      return { minutes, seconds }
     }
-    console.log(score, "optionClicked")
-  }  
+    console.log(formatTime(timeLeft))
+    
+    const goToNextQuestion = () => {
+      const stop = questions.length
+      // if(questions[])
+      setIdx(idx+1)
+      setNextQuestion(questions[idx+1])
+      console.log(stop, idx)
+      console.log(nextQuestion, "nextQuestion")
+    }
+    // if else for last question
+    
+    const optionClicked = (correct) => {
+      if (correct === true) {
+        setScore(score + 1)  
+        goToNextQuestion()
+        // dispatch(createAllowance())
+      } else {
+        goToNextQuestion()
+        setScore(score)
+      }
+      console.log(score, "score after optionClicked")
+    }  
+    
+    const calculateAllowance = () => {
+      const newBalance = scoreRef.current * 1.50
+      console.log(scoreRef.current, "final score in calculateAllowance")
+      console.log(newBalance, "newBalance") 
+      dispatch(createAllowance({
+        balance: newBalance,
+        kid_id: currentKid.id,
+        parent_id: currentKid.parent.id
+      }, navigate))
+    }
   
-  const calculateAllowance = () => {
-    const newBalance = scoreRef.current * 1.50
-    console.log(scoreRef.current, "final score")
-    console.log(newBalance, "newBalance")
-    dispatch(createAllowance({
-      balance: newBalance,
-      kid_id: currentKid.id,
-      parent_id: currentKid.parent.id
-    }), navigate)    
-  }
-  
-  // const submitQuiz = () => {
-  //   dispatch(createAllowance(newAllowance))
-  // }
-
   return (    
     <div className="w-full bg-slate-500 py-24 px-8">
       <div className="md:max-w-[1480px] max-w-[600px] m-auto border-2 border-gray-500 bg-blue-200 py-8">

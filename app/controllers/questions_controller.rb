@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   skip_before_action :authorize_kid, only: [:new_quiz]
-  skip_before_action :authorize_parent, only: [:new_quiz]
+  # skip_before_action :authorize_parent, only: [:new_quiz]
 
   # # GET /questions
   # def index

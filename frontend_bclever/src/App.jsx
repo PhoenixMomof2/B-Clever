@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux"
 import Login from "./forms/Login"
 import Signup from "./forms/Signup"
 import Main from "./pages/Main"
-import KidsList from "./pages/KidsList"
 import ParentDashboard from './pages/ParentDashboard'
 import ParentLogin from "./forms/ParentLogin"
 import ParentSignup from "./forms/ParentSignup"
@@ -31,7 +30,7 @@ import Explore from "./pages/Explore"
       children: [
         {              
           index: true,   
-          path: "*",
+          path: "/",
           element: <Home />,
           errorElement: <NotFound />,
           // action:
@@ -89,12 +88,6 @@ import Explore from "./pages/Explore"
           element: <ParentSignup />,
           errorElement: <NotFound />,
           // action:
-        },
-        {        
-          path: "kids",
-          element: <KidsList />,
-          errorElement: <NotFound />,
-          // action: 
         },
         {        
           path: "login",

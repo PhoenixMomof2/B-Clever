@@ -12,7 +12,7 @@ export const loadQuiz = () => {
     .then(res => res.json())
     .then(data => {
       if(!data.errors){
-      const action = ({ type: "LOAD_QUIZ", payload: data })
+      const action = { type: "LOAD_QUIZ", payload: data }
       console.log(data, "load quiz")
       dispatch(action)
       } else {

@@ -1,6 +1,6 @@
 class KidsController < ApplicationController
-  skip_before_action :authorize_kid, only: :create
-  skip_before_action :authorize_parent, only: [:create, :show, :index]
+  skip_before_action :authorize_kid, only: [:create, :index]
+  # skip_before_action :authorize_parent, only: [:create, :show, :index]
 
   #SignUp
   def create
