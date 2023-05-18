@@ -2,11 +2,11 @@ import React, { useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import CMLOGO_withName from '../images/CMLOGO_withName.jpg'
-import { createAllowance } from '../redux/action/allowanceAction'
+import { addAllowance } from '../redux/action/allowanceAction'
 
 const QuizScreen = () => {    
-  const [timeLeft, setTimeLeft] = useState(10)
-  const timeLeftRef = useRef(10)
+  const [timeLeft, setTimeLeft] = useState(15)
+  const timeLeftRef = useRef(15)
   const intervalIdRef = useRef(null)
   const [intervalId, setIntervalId] = useState(null)
 
@@ -31,19 +31,29 @@ const QuizScreen = () => {
   }    
 
   const countdown = () => {  
+    const newBalance = scoreRef.current * 1.50
+    
     console.log(timeLeftRef.current, "countdown")  
     if (timeLeftRef.current > 0) {
       setTimeLeft(timeLeft => timeLeft - 1)
     } else if (timeLeftRef.current === 0) {
-      console.log("time's up")
-      createAllowance(calculateAllowance(scoreRef.current))
+      console.log("time's up", `You earned $${newBalance}`)
+
+      const newAllowanceData = {
+        balance: newBalance,
+        kid_id: currentKid.id,
+        parent_id: currentKid.parent.id
+      }
+
+      console.log(newAllowanceData, "newAllowance data")
+      dispatch(addAllowance(newAllowanceData, navigate))
+
+      // navigate('/me')
+      setStarted(false)
       setTimeLeft(0)
       clearInterval(intervalIdRef.current)
       setIntervalId(null)
-    } else {
-      clearInterval(intervalIdRef.current)
-      setIntervalId(null)
-    }
+    } 
     formatTime(timeLeftRef.current)
   }
   
@@ -90,25 +100,14 @@ const QuizScreen = () => {
       if (correct === true) {
         setScore(score + 1)  
         goToNextQuestion()
-        // dispatch(createAllowance())
+        // dispatch(addAllowance())
       } else {
         goToNextQuestion()
         setScore(score)
       }
       console.log(score, "score after optionClicked")
     }  
-    
-    const calculateAllowance = () => {
-      const newBalance = scoreRef.current * 1.50
-      console.log(scoreRef.current, "final score in calculateAllowance")
-      console.log(newBalance, "newBalance") 
-      dispatch(createAllowance({
-        balance: newBalance,
-        kid_id: currentKid.id,
-        parent_id: currentKid.parent.id
-      }, navigate))
-    }
-  
+      
   return (    
     <div className="w-full bg-slate-500 py-24 px-8">
       <div className="md:max-w-[1480px] max-w-[600px] m-auto border-2 border-gray-500 bg-blue-200 py-8">

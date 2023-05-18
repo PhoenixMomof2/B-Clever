@@ -2,7 +2,6 @@ class AllowancesController < ApplicationController
   before_action :find_allowance, only: [:show, :update, :destroy]
   # skip_before_action :authorize_parent, only: [:create, :show, :index]
 
-
   # GET /kids/:kid_id/allowances 
   def index          
     render json: current_kid.allowances, status: :ok
@@ -15,7 +14,7 @@ class AllowancesController < ApplicationController
   
   # POST /kids/:kid_id/allowances
   def create  
-    # byebug
+    byebug
     @allowance = current_kid.allowances.create!(allowance_params)
     render json: @allowance, status: :created   
   end
@@ -34,7 +33,7 @@ class AllowancesController < ApplicationController
 
   private
   def allowance_params
-    params.permit(:balance, :parent_id, :kid_id)
+    params.require(:allowance).permit(:balance, :parent_id, :kid_id)
   end
 
   def find_allowance

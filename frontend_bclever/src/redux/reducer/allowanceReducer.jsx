@@ -1,22 +1,25 @@
+import { updateResource } from "../../context/Globals"
+
 const initialState = {
-  allowance: []  
+  allowances: []  
 }
 
 const allowanceReducer = (state=initialState, action) => {
-
   switch(action.type) {
-    case "CREATE_ALLOWANCE":
-          return {
-            ...state,
-            allowance: action.payload             
-          }
-        default: 
+    case "LOAD_ALLOWANCES":
+      // return new non destructive state
+      return action.payload
+    case "ADD_ALLOWANCE":
+      return {
+        ...state,
+        allowance: action.payload             
+      }                
+    case "DELETE_ALLOWANCE":
+      return state.filter(allowance => allowance.id !== action.payload)
+    case "EDIT_ALLOWANCE":
+      return updateResource(state, action.payload) 
+    default:
       return state
   }
 }
 export default allowanceReducer
-
-// const blog = state.find(b => b.id === action.payload.blog_id);
-//       const updatedComments = addResource(blog.comments, action.payload)
-//       const updatedBlog = updateResourceCollection(blog, "comments", updatedComments)
-//       return updateResource(state, updatedBlog);

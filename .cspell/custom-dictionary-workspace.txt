@@ -4,6 +4,7 @@ chartjs
 dropdownlist
 excalidraw
 mbaku
+moneyhouse
 moneyman
 nakia
 parent_profile

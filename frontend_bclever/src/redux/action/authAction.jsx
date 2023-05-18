@@ -1,5 +1,5 @@
 import { setErrors, clearErrors } from '../../redux/action/errorsAction'
-import { headers } from "../../context/Globals"
+import { headers } from '../../context/Globals'
 
 export const loadKids = () => {
   // thunk middleware uses these actions to make asynchronous calls

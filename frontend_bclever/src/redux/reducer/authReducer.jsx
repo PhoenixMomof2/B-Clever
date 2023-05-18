@@ -1,3 +1,5 @@
+import { addResource, updateResource, updateResourceCollection } from '../../context/Globals'
+
 const initialState = {
   kids: [],
   currentKid: {},
@@ -37,6 +39,12 @@ const authReducer = (state=initialState, action) => {
         currentKid: initialState.currentKid, // or = null
         loggedIn: false,       
       };
+    case "ADD_KID_ALLOWANCE":
+      console.log(action.payload)
+    const kid = state.find(k => k.id === action.payload.kid_id)
+    const updatedAllowances = addResource(kid.allowances, action.payload)
+    const updatedKid = updateResourceCollection(...kid, kid.allowances, updatedAllowances)
+      return updateResource(state, updatedKid);
     default: 
       return state
   }

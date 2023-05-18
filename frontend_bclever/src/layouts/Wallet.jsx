@@ -26,16 +26,16 @@ const Wallet = () => {
   }
 
   return (
-    <div className="w-full bg-slate-300 py-12">
+    <div className="w-full bg-slate-300 py-12 border-transparent rounded-2xl shadow-xl">
       <h1 className="font-semibold text-4xl text-center pb-6 border-b text-green-400">B-Clever Kids</h1>          
       <div className="md:max-w-[1480px] max-w-[600px] m-auto grid md:grid-cols-2">
-        <div className="uppercase text-center text-gray-800 p-2 bg-white border-transparent rounded-2xl shadow-xl">          
+        <div className="uppercase text-center text-gray-800 p-2 bg-white ">          
           <Doughnut data={data} style={{}}/>  
         </div>   
         <Slider {...settings}>
-          <KidsCard />          
-
-
+           {kids.map((kid) => (
+              <KidsCard key={kid.id} kid={kid}/> 
+            ))}
         </Slider>
       </div>
     </div>
