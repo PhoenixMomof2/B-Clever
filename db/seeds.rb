@@ -9,12 +9,12 @@ Choice.destroy_all
 
 
 puts "Creating kids..."
-kal = Kid.create!(name: "Kal", password: "player1", age: 8, avatar: "tchalla.jpg", grade: "2", wallet: 200.00)
-miles = Kid.create!(name: "Miles", password: "player2", age: 6, avatar: "mbaku.jpg", grade: "1", wallet: 200.00)
-reagan = Kid.create!(name: "Reagan", password: "player3", age: 6, avatar: "nakia.jpg", grade: "K", wallet: 200.00)
-kali = Kid.create!(name: "Kali", password: "player4", age: 7, avatar: "shuri.jpg", grade: "2", wallet: 200.00)
-gavin = Kid.create!(name: "Gavin", password: "player5", age: 8, avatar: "wkabi.jpg", grade: "2", wallet: 200.00) 
-izzie = Kid.create!(name: "Izzie", password: "player6", age: 7, avatar: "okoye.jpg", grade: "K", wallet: 200.00)
+kal = Kid.create!(name: "Kal", password: "player1", age: 8, avatar: "tchalla.jpg", grade: "2")
+miles = Kid.create!(name: "Miles", password: "player2", age: 6, avatar: "mbaku.jpg", grade: "1")
+reagan = Kid.create!(name: "Reagan", password: "player3", age: 6, avatar: "nakia.jpg", grade: "K")
+kali = Kid.create!(name: "Kali", password: "player4", age: 7, avatar: "shuri.jpg", grade: "2")
+gavin = Kid.create!(name: "Gavin", password: "player5", age: 8, avatar: "wkabi.jpg", grade: "2") 
+izzie = Kid.create!(name: "Izzie", password: "player6", age: 7, avatar: "okoye.jpg", grade: "K")
   
 puts "Creating parents..."
 kandis = Parent.create!(name: "Kandis", password: "parent1", age: 39, state: "Virginia")

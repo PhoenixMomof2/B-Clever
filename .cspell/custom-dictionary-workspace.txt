@@ -3,9 +3,11 @@ actioncable
 chartjs
 dropdownlist
 excalidraw
+littleguywriting
 mbaku
 moneyhouse
 moneyman
 nakia
+okoye
 parent_profile
 toastify

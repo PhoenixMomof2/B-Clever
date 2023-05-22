@@ -1,6 +1,7 @@
 class AllowanceSerializer < ActiveModel::Serializer
-  attributes :id, :balance, :kid_id, :parent_id
+  attributes :id, :balance, :kid_id, :parent_id, :date
 
-  belongs_to :kid
-  belongs_to :parent
+  def date
+    object.updated_at.strftime("%A, %B %d, %Y at %I:%M %p")
+  end
 end

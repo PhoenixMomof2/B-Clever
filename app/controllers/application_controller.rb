@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
   
   before_action :authorize_kid, if: @current_kid
-  # before_action :authorize_parent, if: @current_parent
+  before_action :authorize_parent, if: @current_parent
   
   def current_kid
     @current_kid = Kid.find_by_id(session[:kid_id])  

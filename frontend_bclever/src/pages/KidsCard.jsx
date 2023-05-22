@@ -14,7 +14,7 @@ const KidsCard = ({kid}) => {
           <path d="M4.462 19.462c.42-.419.753-.89 1-1.394.453.213.902.434 1.347.661a6.743 6.743 0 01-1.286 1.794.75.75 0 11-1.06-1.06z" />
           </svg>Grade - {kid.grade}</span>
           <Stars />
-          <h2 className="py-2 text-lg font-semibold">I have <span className="text-green-400">${kid.wallet}</span> in my wallet!</h2>
+          <h2 className="py-2 text-lg font-semibold">I have <span className="text-green-400">${kid.wallet_total}</span> in my wallet!</h2>
         </div>   
         <div className="absolute top-0 bg-yellow-400 px-2 text-white font-extrabold rounded-lg">
             Age: {kid.age}

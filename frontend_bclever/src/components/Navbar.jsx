@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { logoutCurrentKid } from '../redux/action/authAction'
+import { logoutCurrentKid } from '../redux/action/kidsAction'
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false)
@@ -9,7 +9,7 @@ const Navbar = () => {
   
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const { loggedIn } = useSelector(store => store.authReducer)
+	const { loggedIn } = useSelector(store => store.kidsReducer)
 	
 	const logout = () => {		
       fetch("/logout", { method: "DELETE" }).then(() => {

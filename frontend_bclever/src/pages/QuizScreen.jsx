@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import CMLOGO_withName from '../images/CMLOGO_withName.jpg'
 import { addAllowance } from '../redux/action/allowanceAction'
+import { addResource, updateResourceCollection } from "../context/Globals"
+
 
 const QuizScreen = () => {    
   const [timeLeft, setTimeLeft] = useState(15)
@@ -12,7 +14,7 @@ const QuizScreen = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { currentKid } = useSelector(store => store.authReducer)
+  const { currentKid } = useSelector(store => store.kidsReducer)
 
   const { questions } = useSelector(gameState => gameState.quizReducer)
   const indexRef = useRef(0)
@@ -39,14 +41,17 @@ const QuizScreen = () => {
     } else if (timeLeftRef.current === 0) {
       console.log("time's up", `You earned $${newBalance}`)
 
-      const newAllowanceData = {
-        balance: newBalance,
+      const newAllowance = {
+        balance: parseFloat(newBalance),
         kid_id: currentKid.id,
         parent_id: currentKid.parent.id
       }
 
-      console.log(newAllowanceData, "newAllowance data")
-      dispatch(addAllowance(newAllowanceData, navigate))
+      console.log(newAllowance, "newAllowance")
+      const updatedAllowances = addResource(currentKid.allowances, newAllowance)
+      const updatedKid = updateResourceCollection(currentKid, "allowances", updatedAllowances)
+      console.log(updatedKid)
+      dispatch(addAllowance(newAllowance, navigate))
 
       // navigate('/me')
       setStarted(false)

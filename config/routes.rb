@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
+  get "/new_quiz", to: "questions#new_quiz"
+  
   resources :kids
   resources :parents
   resources :allowances
-  resources :questions
-  resources :choices
-  
-  # Custom Question Routes
-  get "/new_quiz", to: "questions#new_quiz"
-  
+  post "/parent_allowances", to: "allowances#parent_allowances"
   # Sessions
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"

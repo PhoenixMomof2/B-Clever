@@ -6,14 +6,14 @@ import KidsCard from '../pages/KidsCard'
 import Slider from "react-slick"
 
 const Wallet = () => {
-  const kids  = useSelector(store => store.authReducer.kids)
+  const kids  = useSelector(store => store.kidsReducer.kids)
   ChartJS.register(ArcElement, Legend, Tooltip)
 
   const data = {
     labels: kids.map((kid) => kid.name),
     datasets: [{
         label: "Kids Wallet Totals",
-        data: kids.map((kid) => kid.wallet)
+        data: kids.map((kid) => kid.wallet_total)
       }]
   }
 

@@ -25,7 +25,7 @@ export const loadCurrentParent = () => {
       .then(res => res.json())
       .then(data => {
         if(!data.errors){
-          const action = { type: "LOGIN", payload: data }
+          const action = { type: "LOGIN_PARENT", payload: data }
           console.log(data, "Current Parent")
           dispatch(action)
         } else {
@@ -48,7 +48,7 @@ export const loginCurrentParent = (parent, navigate) => {
       if (data.errors) {
         dispatch(setErrors(data.errors))    
       } else {
-        const action = { type: "LOGIN", payload: data }
+        const action = { type: "LOGIN_PARENT", payload: data }
         dispatch(action)
         dispatch(clearErrors())
         navigate("/parent_profile") 
@@ -69,7 +69,7 @@ export const signupParent = (parent, navigate) => {
         if (data.errors) {
           dispatch(setErrors(data.errors))  
         } else {
-        dispatch({ type: "SIGNUP", payload: data })
+        dispatch({ type: "SIGNUP_PARENT", payload: data })
         dispatch({ type: "ADD_PARENT", payload: data }) 
         navigate("/me") 
       }

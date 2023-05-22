@@ -33,7 +33,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_184145) do
     t.integer "age"
     t.string "avatar"
     t.string "grade"
-    t.float "wallet"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

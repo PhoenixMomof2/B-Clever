@@ -6,8 +6,7 @@ class CreateKids < ActiveRecord::Migration[7.0]
       t.integer :age
       t.string :avatar
       t.string :grade
-      t.float :wallet
-
+      
       t.timestamps
     end
   end

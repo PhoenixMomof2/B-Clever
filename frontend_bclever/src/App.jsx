@@ -4,14 +4,15 @@ import Login from "./forms/Login"
 import Signup from "./forms/Signup"
 import Main from "./pages/Main"
 import ParentDashboard from './pages/ParentDashboard'
-import ParentLogin from "./forms/ParentLogin"
-import ParentSignup from "./forms/ParentSignup"
+import NewAllowanceForm from "./forms/NewAllowanceForm"
+import EditAllowanceForm from './forms/EditAllowanceForm'
 import ParentList from "./components/ParentList"
 import Wallet from "./layouts/Wallet"
+import MyKidsWallet from "./layouts/MyKidsWallet"
 import NotFound from "./pages/NotFound"
 import Profile from "./pages/Profile"
 import { useEffect } from "react"
-import { loadKids, loadCurrentKid } from './redux/action/authAction'
+import { loadKids, loadCurrentKid } from './redux/action/kidsAction'
 import { loadParents } from './redux/action/parentAuthAction'
 import { loadQuiz } from "./redux/action/quizAction"
 import QuizScreen from "./pages/QuizScreen"
@@ -49,7 +50,19 @@ import Explore from "./pages/Explore"
         },
         {                
           path: "parent_profile",
-          element: <ParentDashboard />,
+          element: <ParentDashboard />,          
+          errorElement: <NotFound />,
+          // action:
+        },
+        {                
+          path: "allowances/new",
+          element: <NewAllowanceForm />,          
+          errorElement: <NotFound />,
+          // action:
+        },
+        {                
+          path: "allowances/:id/edit",
+          element: <EditAllowanceForm />,          
           errorElement: <NotFound />,
           // action:
         },
@@ -72,6 +85,12 @@ import Explore from "./pages/Explore"
           // action: 
         },
         {        
+          path: "my_kids_wallet",
+          element: <MyKidsWallet />,
+          errorElement: <NotFound />,
+          // action: 
+        },
+        {        
           path: "new_quiz",
           element: <QuizScreen />,
           errorElement: <NotFound />,
@@ -82,22 +101,10 @@ import Explore from "./pages/Explore"
           element: <Signup />,
           errorElement: <NotFound />,
           // action:
-        },
-        {        
-          path: "signup_parent",
-          element: <ParentSignup />,
-          errorElement: <NotFound />,
-          // action:
-        },
+        },        
         {        
           path: "login",
           element: <Login />,
-          errorElement: <NotFound />,
-          // action:  
-        },
-        {        
-          path: "login_parent",
-          element: <ParentLogin />,
           errorElement: <NotFound />,
           // action:  
         },
