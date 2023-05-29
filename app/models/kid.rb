@@ -8,7 +8,10 @@ class Kid < ApplicationRecord
   
   has_secure_password  
 
- def calculate_wallet_total
-    allowances.sum(:balance)
- end
+   def calculate_wallet_total
+      self.allowances.sum(:balance)
+   end
+   # def calculate_wallet_total
+   #    allowances.sum(:balance)
+   # end
 end

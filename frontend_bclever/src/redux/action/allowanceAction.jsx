@@ -1,6 +1,21 @@
 import { setErrors } from './errorsAction'
 import { headers } from '../../context/Globals'
 
+export const loadAllowances = () => {
+  // thunk middleware uses these actions to make asynchronous calls
+  // it expects a function to be returned
+  // the function itself takes in a parameter called dispatch
+  return dispatch => {
+    // asynchronous calls
+    fetch('/allowances')
+    .then(res => res.json())
+    .then(data => {
+      const action = { type: "LOAD_ALLOWANCES", payload: data }
+      dispatch(action)
+    })
+  }
+} 
+
 export const addAllowance = (allowance, navigate) => {
   return dispatch => {
     fetch('/allowances', {

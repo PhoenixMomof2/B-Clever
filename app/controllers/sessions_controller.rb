@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  skip_before_action :authorize_kid, only: [:create, :login_parent]
-  skip_before_action :authorize_parent, only: [:create,:login]
+  skip_before_action :authorize_kid, only: [:create]
+  skip_before_action :authorize_parent, only: [:login_parent]
 
   # Login Kid
   def create    

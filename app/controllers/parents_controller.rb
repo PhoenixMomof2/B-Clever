@@ -22,7 +22,6 @@ class ParentsController < ApplicationController
 
   # GET /parent_profile
   def show
-    byebug
     render json: @current_parent, status: :ok
   end
 

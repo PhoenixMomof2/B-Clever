@@ -1,6 +1,6 @@
 class KidsController < ApplicationController
   skip_before_action :authorize_kid, only: [:create, :index]
-  # skip_before_action :authorize_parent, only: [:create, :show, :index]
+  # skip_before_action :authorize_parent, only: [:create, :show, :index] 
 
   #SignUp
   def create
@@ -17,6 +17,7 @@ class KidsController < ApplicationController
     render json: Kid.all, status: :ok
   end
 
+  # Suggested to trigger the serializer to run the wallet_total after changes / not working
   # def update
   #   kid = Kid.find(params[:id])
   #   if kid.update(kid_params)

@@ -29,13 +29,11 @@ const QuizScreen = () => {
     const id = setInterval(() => {countdown()}, 1000)
     setIntervalId(id)
     setStarted(true)
-    console.log("start clicked", id)
   }    
 
   const countdown = () => {  
     const newBalance = scoreRef.current * 1.50
-    
-    console.log(timeLeftRef.current, "countdown")  
+  
     if (timeLeftRef.current > 0) {
       setTimeLeft(timeLeft => timeLeft - 1)
     } else if (timeLeftRef.current === 0) {
@@ -50,7 +48,7 @@ const QuizScreen = () => {
       console.log(newAllowance, "newAllowance")
       const updatedAllowances = addResource(currentKid.allowances, newAllowance)
       const updatedKid = updateResourceCollection(currentKid, "allowances", updatedAllowances)
-      console.log(updatedKid)
+      console.log(updatedKid, "updatedKid")
       dispatch(addAllowance(newAllowance, navigate))
 
       // navigate('/me')
@@ -63,41 +61,30 @@ const QuizScreen = () => {
   }
   
   
-  useEffect(() => {
-    timeLeftRef.current = timeLeft    
-    intervalIdRef.current = intervalId
-    indexRef.current = idx
-    scoreRef.current = score
-    console.log(indexRef.current, "useEffect idx")
-    console.log(scoreRef.current, "useEffect score")
-    console.log(timeLeftRef.current, "useEffect timeLeft") 
-  }, [timeLeft, intervalId, idx, score])
-  // updates references when the state changes (must link references to the values)
-  
-  useEffect(() => {
-    return () => {
-      console.log("clean up", intervalId)
-      clearInterval(intervalId)}
-    }, [intervalId])
+    useEffect(() => {
+      timeLeftRef.current = timeLeft    
+      intervalIdRef.current = intervalId
+      indexRef.current = idx
+      scoreRef.current = score    
+    }, [timeLeft, intervalId, idx, score])
+    // updates references when the state changes (must link references to the values)
     
-    // create a check answer action that adds to t correct count (marked Answers)
-    // create a tally score action
-    // create an allowance calculator after quiz score tally ($1.50/correct answer)
-    
+    useEffect(() => {
+      return () => {
+        clearInterval(intervalId)}
+      }, [intervalId])
+       
     const formatTime = (timeLeft) => {
       let minutes = Math.floor(timeLeft / 60)
       let seconds = Math.floor(timeLeft % 60)
       return { minutes, seconds }
     }
-    console.log(formatTime(timeLeft))
-    
+       
     const goToNextQuestion = () => {
       const stop = questions.length
       // if(questions[])
       setIdx(idx+1)
-      setNextQuestion(questions[idx+1])
-      console.log(stop, idx)
-      console.log(nextQuestion, "nextQuestion")
+      setNextQuestion(questions[idx+1])      
     }
     // if else for last question
     
@@ -109,8 +96,7 @@ const QuizScreen = () => {
       } else {
         goToNextQuestion()
         setScore(score)
-      }
-      console.log(score, "score after optionClicked")
+      }     
     }  
       
   return (    

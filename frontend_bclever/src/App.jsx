@@ -14,6 +14,7 @@ import Profile from "./pages/Profile"
 import { useEffect } from "react"
 import { loadKids, loadCurrentKid } from './redux/action/kidsAction'
 import { loadParents } from './redux/action/parentAuthAction'
+import { loadAllowances } from './redux/action/allowanceAction'
 import { loadQuiz } from "./redux/action/quizAction"
 import QuizScreen from "./pages/QuizScreen"
 import Home from "./pages/Home"
@@ -120,6 +121,7 @@ import Explore from "./pages/Explore"
       dispatch(loadCurrentKid()) 
       dispatch(loadParents())    
       dispatch(loadQuiz()) 
+      dispatch(loadAllowances())
     },[dispatch])
 
     return (

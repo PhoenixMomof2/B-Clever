@@ -1,5 +1,3 @@
-import { updateResourceCollection } from "../../context/Globals"
-
 const initialState = {
   kids: [],
   allowances: [],
@@ -15,8 +13,13 @@ const kidsReducer = (state=initialState, action) => {
     case "LOAD_KIDS":
       return {
         ...state,
-        kids: action.payload,
+        kids: action.payload,        
       }    
+    case "LOAD_ALLOWANCES":
+      return {
+        ...state,
+        allowances: action.payload, 
+      }
     case "LOGIN":
       return {
         ...state,
@@ -44,24 +47,24 @@ const kidsReducer = (state=initialState, action) => {
         loggedIn: false,       
         }          
     case "ADD_ALLOWANCE":
-      const kid = state.kids.find(k => k.id === action.payload.kid_id)
+      // const kid = state.kids.find(k => k.id === action.payload.kid_id)
       const updatedAllowances = [...state.allowances, action.payload]
-      const updatedKid = {...kid, allowances: updatedAllowances }
+      const updatedKid = {...state.currentKid, allowances: updatedAllowances, wallet_total: action.payload.kid.wallet_total }
       return {...state, allowances: updatedAllowances, currentKid: updatedKid}    
     case "ADD_PARENT_ALLOWANCE":
       const parents_kid = state.kids.find(k => k.id === action.payload.kid_id) 
       const updatedKidAllowances = [...state.allowances, action.payload]
-      const updatedParentKid = updateResourceCollection(parents_kid, "allowances", updatedKidAllowances)
+      const updatedParentKid = {...parents_kid, allowances: updatedKidAllowances, wallet_total: action.payload.kid.wallet_total }
       return {...state, allowances: updatedKidAllowances, currentKid: updatedParentKid}    
     case "EDIT_ALLOWANCE":
-      const kid_to_edit = state.kids.find(k => k.id === action.payload.kid_id)
+      // const kid_to_edit = state.kids.find(k => k.id === action.payload.kid_id)
       const editedAllowances = state.allowances.map(allowance => allowance.id === action.payload.id ? action.payload : allowance)
-      const editedKid = {...kid_to_edit, allowances: editedAllowances }
+      const editedKid = {...state.currentKid, allowances: editedAllowances, wallet_total: action.payload.kid.wallet_total }
       return {...state, allowances: editedAllowances, currentKid: editedKid}
     case "DELETE_ALLOWANCE":
-      const kid_to_delete_from = state.kids.find(k => k.id === action.payload.kid_id)
+      // const kid_to_delete_from = state.kids.find(k => k.id === action.payload.kid_id)
       const filteredAllowances = state.allowances.filter(allowance => allowance.id !== action.payload)
-      const updatedKidAfterDelete = updateResourceCollection(kid_to_delete_from, "allowances", filteredAllowances)
+      const updatedKidAfterDelete = {...state.currentKid, allowances: filteredAllowances, wallet_total: action.payload.kid.wallet_total }
       return {...state, allowances: filteredAllowances, currentKid: updatedKidAfterDelete}
     case "LOAD_PARENTS":
     return {
