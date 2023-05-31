@@ -62,13 +62,20 @@ const kidsReducer = (state=initialState, action) => {
       const editedKid = {...state.currentKid, allowances: editedAllowances, wallet_total: action.payload.kid.wallet_total }
       return {...state, allowances: editedAllowances, currentKid: editedKid}
     case "DELETE_ALLOWANCE":
-      // const kid_to_delete_from = state.kids.find(k => k.id === action.payload.kid_id)
+      const deletedAllowance = state.allowances.find(allowance => allowance.id === action.payload)
       const filteredAllowances = state.allowances.filter(allowance => allowance.id !== action.payload)
-      const updatedKidAfterDelete = {...state.currentKid, allowances: filteredAllowances, wallet_total: action.payload.kid.wallet_total }
+      const updatedWalletTotal = state.currentKid.wallet_total - deletedAllowance.balance
+    
+      const updatedKidAfterDelete = {
+        ...state.currentKid,
+        allowances: filteredAllowances,
+        wallet_total: updatedWalletTotal
+      }
+      console.log(updatedKidAfterDelete)
       return {...state, allowances: filteredAllowances, currentKid: updatedKidAfterDelete}
     case "LOAD_PARENTS":
-    return {
-      ...state,
+      return {
+        ...state,
         parents: action.payload          
     }    
     case "LOGIN_PARENT":

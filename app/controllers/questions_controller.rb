@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   skip_before_action :authorize_kid, only: :new_quiz
+  skip_before_action :authorize_parent, only: :new_quiz
   
   # GET /new_quiz (get a random set of 30 questions)
   def new_quiz

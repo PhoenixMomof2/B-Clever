@@ -10,41 +10,46 @@ import { clearErrors } from '../redux/action/errorsAction'
 const Signup = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [parent_name, setParentName] = useState("")
+  const [parent_age, setParentAge] = useState("")
+  const [parent_state, setParentState] = useState("")
+  const [password, setPassword] = useState("")
+  const [passwordConfirmation, setPasswordConfirmation] = useState("")
   const [name, setName] = useState("")
   const [age, setAge] = useState("")
   const [grade, setGrade] = useState("")
   const [avatar, setAvatar] = useState("")
   const [state, setState] = useState("")
-  const [password, setPassword] = useState("")
-  const [passwordConfirmation, setPasswordConfirmation] = useState("")
+  const [kid_password, setKidPassword] = useState("")
+  const [kid_passwordConfirmation, setKidPasswordConfirmation] = useState("")
   
-  const [isChecked, setIsChecked] = useState(false)
+  // const [isChecked, setIsChecked] = useState(false)
  
-  const handleCheckboxChange = () => {  
-    setIsChecked(!isChecked);
-  }
+  // const handleCheckboxChange = () => {  
+  //   setIsChecked(!isChecked);
+  // }
   
   const handleSubmit = (e) => {
     e.preventDefault()
     
     const kid = {
-      name, age, grade, avatar, password, passwordConfirmation
+      name, age, grade, avatar, kid_password, kid_passwordConfirmation
     }
   
     const parent = {
-      name, age, state, password, passwordConfirmation
+      parent_name, parent_age, parent_state, password, passwordConfirmation
     }
  
-    const handleKidSubmit = () => { dispatch(signupKid(kid, navigate), loginCurrentKid(kid, navigate))
-    }
+    // const handleKidSubmit = () => { dispatch(signupKid(kid, navigate), loginCurrentKid(kid, navigate))
+    // }
 
-    const handleParentSubmit = () => { dispatch(signupParent(parent, navigate), loginCurrentParent(parent, navigate))    
-    }
-    console.log(isChecked)
+    // const handleParentSubmit = () => { dispatch(signupParent(parent, navigate), loginCurrentParent(parent, navigate))    
+    // }
+    // console.log(isChecked)
     // debugger
-    const submitForm = () => { isChecked ? handleParentSubmit() : handleKidSubmit() }   
+    // const submitForm = () => { isChecked ? handleParentSubmit() : handleKidSubmit() }   
     
-    submitForm()
+    // submitForm()
   }
          
     useEffect(() => {
@@ -65,25 +70,16 @@ return (
         <div className="-space-y-px rounded-md shadow-sm">
           <div>
             <label htmlFor="Name" className="sr-only">Name</label>
-            <input id="name" name="name" type="text" autoComplete="name" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
+            <input id="parent-name" name="name" type="text" autoComplete="name" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Parent Name" value={name} onChange={(e) => setParentName(e.target.value)}/>
           </div>
           <div>
             <label htmlFor="Age" className="sr-only">Age</label>
-            <input id="age" name="age" type="text" autoComplete="age" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Age" value={age} onChange={(e) => setAge(e.target.value)}/>
+            <input id="parent-age" name="age" type="text" autoComplete="age" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Parent Age" value={age} onChange={(e) => setParentAge(e.target.value)}/>
           </div>
-          {isChecked === true ?
-          (<> <div>
-            <label htmlFor="Grade" className="sr-only">Grade</label>
-            <input id="grade" name="grade" type="text" autoComplete="grade" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Grade" value={grade} onChange={(e) => setGrade(e.target.value)}/>
-          </div>         
           <div>
-            <label htmlFor="Avatar" className="sr-only">Avatar</label>
-            <input id="avatar" name="avatar" type="text" autoComplete="avatar" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Avatar" value={avatar} onChange={(e) => setAvatar(e.target.value)}/>
-          </div></>) :
-          (<div>
             <label htmlFor="State" className="sr-only">State</label>
-            <input id="state" name="state" type="text" autoComplete="state" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="State" value={state} onChange={(e) => setState(e.target.value)}/>
-          </div>) }
+            <input id="parent-state" name="state" type="text" autoComplete="state" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Parent State" value={state} onChange={(e) => setParentState(e.target.value)}/>
+          </div>
           <div>
             <label htmlFor="password" className="sr-only">Password</label>
             <input id="password" name="password" type="password" autoComplete="current-password" required className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Password" value={password}
@@ -94,13 +90,33 @@ return (
             <input id="password-confirmation" name="password-confirmation" type="text" autoComplete="password-confirmation" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Password Confirmation" value={passwordConfirmation}
                     onChange={(e) => setPasswordConfirmation(e.target.value)}/>
           </div>   
-        </div>
-        <div className ="flex items-start mb-6">
-          <div className ="flex items-center h-5">
-            <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"/>
+          <div>
+            <label htmlFor="Name" className="sr-only">Kid Name</label>
+            <input id="name" name="name" type="text" autoComplete="name" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Kid Name" value={name} onChange={(e) => setName(e.target.value)}/>
           </div>
-          <label htmlFor="remember" className ="ml-2 text-sm font-semilight text-blue-500 dark:text-blue-300">Sign up as B-Clever Parent</label>
-        </div>     
+          <div>
+            <label htmlFor="Age" className="sr-only">Kid Age</label>
+            <input id="age" name="age" type="text" autoComplete="age" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Kid Age" value={age} onChange={(e) => setAge(e.target.value)}/>
+          </div>
+          <div>
+            <label htmlFor="Grade" className="sr-only">Kid Grade</label>
+            <input id="grade" name="grade" type="text" autoComplete="grade" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Kid Grade" value={grade} onChange={(e) => setGrade(e.target.value)}/>
+          </div>         
+          <div>
+            <label htmlFor="Avatar" className="sr-only">Avatar</label>
+            <input id="avatar" name="avatar" type="text" autoComplete="avatar" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Kid Avatar" value={avatar} onChange={(e) => setAvatar(e.target.value)}/>
+          </div>
+        </div>
+        <div>
+            <label htmlFor="password" className="sr-only">Kid Password</label>
+            <input id="kid-password" name="password" type="password" autoComplete="current-password" required className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Kid Password" value={kid_password}
+                    onChange={(e) => setKidPassword(e.target.value)}/>
+          </div>
+          <div>
+            <label htmlFor="Password_Confirmation" className="sr-only">Kid Password Confirmation</label>
+            <input id="kid-password-confirmation" name="password-confirmation" type="text" autoComplete="password-confirmation" required className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Kid Password Confirmation" value={kid_passwordConfirmation}
+                    onChange={(e) => setKidPasswordConfirmation(e.target.value)}/>
+          </div>   
         <div>
           <button type="submit" className="group relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
