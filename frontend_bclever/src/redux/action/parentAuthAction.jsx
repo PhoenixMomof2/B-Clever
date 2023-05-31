@@ -57,7 +57,7 @@ export const loginCurrentParent = (parent, navigate) => {
   }
 } 
 
-export const signupParent = (parent, navigate) => {
+export const signupParent = (parent) => {
   return dispatch => {
     fetch('/signup_parent', { 
         method: "POST",
@@ -70,8 +70,7 @@ export const signupParent = (parent, navigate) => {
           dispatch(setErrors(data.errors))  
         } else {
         dispatch({ type: "SIGNUP_PARENT", payload: data })
-        dispatch({ type: "ADD_PARENT", payload: data }) 
-        navigate("/me") 
+        dispatch({ type: "ADD_PARENT", payload: data })        
       }
     })   
   }

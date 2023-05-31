@@ -57,7 +57,7 @@ export const loginCurrentKid = (kid, navigate) => {
   }
 } 
 
-export const signupKid = (kid, navigate) => {
+export const signupKid = (kid) => {
   return dispatch => {
     fetch('/signup', { 
         method: "POST",
@@ -71,7 +71,6 @@ export const signupKid = (kid, navigate) => {
         } else {
         dispatch({ type: "SIGNUP", payload: data })
         dispatch({ type: "ADD_KID", payload: data }) 
-        navigate("/me") 
       }
     })   
   }
