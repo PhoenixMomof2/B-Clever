@@ -57,20 +57,22 @@ export const loginCurrentParent = (parent, navigate) => {
   }
 } 
 
-export const signupParent = (parent) => {
+export const signupParent = ({parent, kid, allowance}) => {
   return dispatch => {
     fetch('/signup_parent', { 
         method: "POST",
       headers,
-      body: JSON.stringify(parent),
+      body: JSON.stringify({parent, kid, allowance}),
+      // {kid, parent, firstAllowance}
+      // render json: {parent: parent, kid: kid, allowance: allowance}
+      // params[:kid]
       })
       .then(res => res.json())
       .then((data) => {
         if (data.errors) {
           dispatch(setErrors(data.errors))  
         } else {
-        dispatch({ type: "SIGNUP_PARENT", payload: data })
-        dispatch({ type: "ADD_PARENT", payload: data })        
+        dispatch({ type: "SIGNUP_PARENT", payload: data })        
       }
     })   
   }

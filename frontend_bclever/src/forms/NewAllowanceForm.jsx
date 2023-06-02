@@ -20,7 +20,8 @@ const NewAllowanceForm = () => {
       parent_id: currentParent.id
     }
     console.log(newAllowance, "newAllowance")
-    dispatch(addParentAllowance(newAllowance, navigate))
+    debugger
+    dispatch(addParentAllowance(newAllowance, navigate))    
   }
       
 return (

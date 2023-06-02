@@ -57,28 +57,26 @@ export const loginCurrentKid = (kid, navigate) => {
   }
 } 
 
-export const signupKid = (kid) => {
-  return dispatch => {
-    fetch('/signup', { 
-        method: "POST",
-      headers,
-      body: JSON.stringify(kid),
-      })
-      .then(res => res.json())
-      .then((data) => {
-        if (data.errors) {
-          dispatch(setErrors(data.errors))  
-        } else {
-        dispatch({ type: "SIGNUP", payload: data })
-        dispatch({ type: "ADD_KID", payload: data }) 
-      }
-    })   
-  }
-}
+// export const signupKid = (kid) => {
+//   return dispatch => {
+//     fetch('/signup', { 
+//         method: "POST",
+//       headers,
+//       body: JSON.stringify(kid),
+//       })
+//       .then(res => res.json())
+//       .then((data) => {
+//         if (data.errors) {
+//           dispatch(setErrors(data.errors))  
+//         } else {
+//         dispatch({ type: "SIGNUP", payload: data })
+//         dispatch({ type: "ADD_KID", payload: data }) 
+//       }
+//     })   
+//   }
+// }
 
 export const logoutCurrentKid = () => {  
   // NOT USING THUNK - NO FETCH IN THIS ACTION
-  return {
-    type: "LOGOUT"
-  }  
+  return { type: "LOGOUT" }  
 } 

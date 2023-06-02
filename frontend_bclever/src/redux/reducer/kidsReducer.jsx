@@ -31,14 +31,12 @@ const kidsReducer = (state=initialState, action) => {
       return {
         ...state, 
         kids: [...state.kids, action.payload],
-        currentKid: action.payload, 
-        loggedIn: true
+        currentKid: action.payload      
       }
     case "SIGNUP":
       return {
         ...state,
-        currentKid: action.payload,
-        loggedIn: true          
+        currentKid: action.payload
       }          
     case "LOGOUT":
       return {
@@ -47,32 +45,48 @@ const kidsReducer = (state=initialState, action) => {
         loggedIn: false,       
         }          
     case "ADD_ALLOWANCE":
-      // const kid = state.kids.find(k => k.id === action.payload.kid_id)
       const updatedAllowances = [...state.allowances, action.payload]
       const updatedKid = {...state.currentKid, allowances: updatedAllowances, wallet_total: action.payload.kid.wallet_total }
-      return {...state, allowances: updatedAllowances, currentKid: updatedKid}    
-    case "ADD_PARENT_ALLOWANCE":
-      const parents_kid = state.kids.find(k => k.id === action.payload.kid_id) 
-      const updatedKidAllowances = [...state.allowances, action.payload]
-      const updatedParentKid = {...parents_kid, allowances: updatedKidAllowances, wallet_total: action.payload.kid.wallet_total }
-      return {...state, allowances: updatedKidAllowances, currentKid: updatedParentKid}    
+      const updateKids =  state.kids.map((kid) => kid.id === updatedKid.id ? updatedKid : kid)
+      return {...state, allowances: updatedAllowances, currentKid: updatedKid, kids: updateKids}    
     case "EDIT_ALLOWANCE":
-      // const kid_to_edit = state.kids.find(k => k.id === action.payload.kid_id)
       const editedAllowances = state.allowances.map(allowance => allowance.id === action.payload.id ? action.payload : allowance)
       const editedKid = {...state.currentKid, allowances: editedAllowances, wallet_total: action.payload.kid.wallet_total }
-      return {...state, allowances: editedAllowances, currentKid: editedKid}
+      const updated_Kids = state.kids.map((kid) => kid.id === editedKid.id ? editedKid : kid)
+      return {...state, allowances: editedAllowances, currentKid: editedKid, kids: updated_Kids}
     case "DELETE_ALLOWANCE":
       const deletedAllowance = state.allowances.find(allowance => allowance.id === action.payload)
       const filteredAllowances = state.allowances.filter(allowance => allowance.id !== action.payload)
-      const updatedWalletTotal = state.currentKid.wallet_total - deletedAllowance.balance
-    
+      const updatedWalletTotal = state.currentKid.wallet_total - deletedAllowance.balance    
       const updatedKidAfterDelete = {
         ...state.currentKid,
         allowances: filteredAllowances,
         wallet_total: updatedWalletTotal
       }
-      console.log(updatedKidAfterDelete)
-      return {...state, allowances: filteredAllowances, currentKid: updatedKidAfterDelete}
+      const updated_kids = state.kids.map((kid) => kid.id === updatedKidAfterDelete.id ? updatedKidAfterDelete : kid)
+      return {...state, allowances: filteredAllowances, currentKid: updatedKidAfterDelete, kids: updated_kids}
+    case "ADD_PARENT_ALLOWANCE":
+      const parents_kid = state.currentParent.kids.find((kid) => kid.id === action.payload.kid_id) 
+      const updatedKidAllowances = [...state.allowances, action.payload]
+      const updatedParentKid = {...parents_kid, allowances: updatedKidAllowances, wallet_total: action.payload.kid.wallet_total }
+      const updatedKids = state.kids.map((kid) => kid.id === updatedParentKid.id ? updatedParentKid : kid)
+      return {...state, allowances: updatedKidAllowances, currentKid: updatedParentKid, kids: updatedKids}    
+    case "EDIT_PARENT_ALLOWANCE":
+      const editedParentAllowances = state.allowances.map(allowance => allowance.id === action.payload.id ? action.payload : allowance)
+      const editedParentKid = {...state.currentKid, allowances: editedParentAllowances, wallet_total: action.payload.kid.wallet_total }
+      const updated_Parent_Kids = state.kids.map((kid) => kid.id === editedParentKid.id ? editedParentKid : kid)
+      return {...state, allowances: editedAllowances, currentKid: editedParentKid, kids: updated_Parent_Kids} 
+    case "DELETE_PARENT_ALLOWANCE":
+    const deletedParentAllowance = state.allowances.find(allowance => allowance.id === action.payload)
+    const filteredParentAllowances = state.allowances.filter(allowance => allowance.id !== action.payload)
+    const updatedWalletTotalAfterDelete = state.currentKid.wallet_total - deletedParentAllowance.balance    
+    const updatedKidAfterParentDelete = {
+      ...state.currentKid,
+      allowances: filteredParentAllowances,
+      wallet_total: updatedWalletTotalAfterDelete
+    }
+    const updated_kids_after_delete = state.kids.map((kid) => kid.id === updatedKidAfterParentDelete.id ? updatedKidAfterParentDelete : kid)
+    return {...state, allowances: filteredParentAllowances, currentKid: updatedKidAfterParentDelete, kids: updated_kids_after_delete}   
     case "LOAD_PARENTS":
       return {
         ...state,
@@ -88,14 +102,15 @@ const kidsReducer = (state=initialState, action) => {
       return {
         ...state, 
         parents: [...state.parents, action.payload],
-        currentParent: action.payload, 
-        parent_loggedIn: true
+        currentParent: action.payload
     }
     case "SIGNUP_PARENT":
       return {
         ...state,
-        currentParent: action.payload,
-        parent_loggedIn: true          
+        currentParent: action.payload.parent,
+        parents: [...state.parents, action.payload.parent],
+        kids: [...state.kids, action.payload.kid],
+        allowances: [...state.allowances, action.payload.allowance]                
     }          
     case "LOGOUT_PARENT":
       return {

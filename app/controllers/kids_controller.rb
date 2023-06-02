@@ -16,16 +16,6 @@ class KidsController < ApplicationController
   def index
     render json: Kid.all, status: :ok
   end
-
-  # Suggested to trigger the serializer to run the wallet_total after changes / not working
-  # def update
-  #   kid = Kid.find(params[:id])
-  #   if kid.update(kid_params)
-  #     render json: kid, status: :ok
-  #   else
-  #     render json: kid.errors, status: :unprocessable_entity
-  #   end
-  # end
   
   private
   def kid_params

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   # Kids
   get "/me", to: "kids#show"
-  post "/signup", to: "kids#create"
+  # post "/signup", to: "kids#create"
 
   # Parents
   get "/parent_profile", to:"parents#show"

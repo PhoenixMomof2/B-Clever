@@ -44,9 +44,6 @@ class AllowancesController < ApplicationController
   end
 
   def find_allowance
-    @allowance = current_kid.allowances.find_by_id(params[:id])
-    if !@allowance
-      render json: { error: "Unauthorized" }
-    end
+    @allowance = Allowance.find_by_id(params[:id])   
   end
 end
