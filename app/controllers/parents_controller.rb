@@ -17,6 +17,7 @@ class ParentsController < ApplicationController
   rescue ActiveRecord::RecordInvalid => e
     render json: { error: e.message }, status: :unprocessable_entity
   end
+  
   # def create
   #   # byebug
   #   # ActiveRecord::Base.transaction do
@@ -49,6 +50,6 @@ class ParentsController < ApplicationController
 
   private
   def parent_params
-    params.permit(:name, :password, :password_confirmation, :age, :state)
+    params.require(:parent).permit(:name, :password, :password_confirmation, :age, :state)
   end
 end

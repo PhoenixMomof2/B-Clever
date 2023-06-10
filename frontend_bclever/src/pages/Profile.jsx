@@ -10,7 +10,6 @@ const Profile = () => {
   const [wallet, setWallet] = useState(currentKid.wallet_total)
   console.log(currentKid, allowances)
   
-  // const wallet_total = currentKid.wallet_total
   const savings = (wallet * 0.30).toFixed(2)
   const wants = (wallet * 0.25).toFixed(2)    
   const needs = (wallet * 0.45).toFixed(2)

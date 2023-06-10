@@ -3,6 +3,7 @@ class Parent < ApplicationRecord
   
   has_many :allowances
   has_many :kids, -> { distinct }, through: :allowances
+  accepts_nested_attributes_for :kids
 
   has_secure_password
 end

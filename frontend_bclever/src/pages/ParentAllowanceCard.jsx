@@ -1,13 +1,20 @@
 import moneyhouse from '../images/moneyhouse.jpg'
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { deleteParentAllowance } from '../redux/action/allowanceAction';
 
-const ParentAllowanceCard = ({allowance, kid}) => {   
+const ParentAllowanceCard = ({allowance, thisKid}) => {   
+  const dispatch = useDispatch()
+  
+  const handleDeleteClick = () => {
+    dispatch(deleteParentAllowance(allowance.id))
+  }
 
     return (
       <div className="bg-white overflow-hidden shadow-xl rounded-2xl ">       
         <img src={moneyhouse} alt={moneyhouse} className="h-40 w-full object-cover border-transparent"/>
         <div key={allowance.id} className="p-6">
-          <h1 className="font-bold text-blue-500 text-3xl border-b">{kid.name} earned a ${allowance.balance} allowance!</h1>
+          <h1 className="font-bold text-blue-500 text-3xl border-b">{thisKid.name} earned a ${allowance.balance} allowance!</h1>
           <span className="font-semibold text-red-500 text-sm">{allowance.date}</span>
           <div className="flex gap-2 font-bold items-center text-center py-2">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 font-extrabold text-yellow-400">
@@ -16,8 +23,8 @@ const ParentAllowanceCard = ({allowance, kid}) => {
           <span className="text-yellow-400">Great job!</span> 
           </div>          
           <div className="flex gap-4 py-2">
-            <Link className="px-3 bg-purple-500 rounded border-white border-3" to={`/allowances/${allowance.id}/edit`}>Edit</Link>
-            <button className="px-3 bg-blue-500 rounded border-white border-3">Delete</button>
+            <Link className="px-3 bg-purple-500 rounded border-white border-3" to={`/kid_allowances/${allowance.id}/edit`}>Edit</Link>
+            <button className="px-3 bg-blue-500 rounded border-white border-3" onClick={handleDeleteClick}>Delete</button>
           </div>
         </div>              
       </div>

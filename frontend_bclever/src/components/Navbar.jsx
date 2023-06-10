@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutCurrentKid } from '../redux/action/kidsAction'
+import { logoutCurrentParent } from '../redux/action/parentAuthAction'
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false)
@@ -9,11 +10,18 @@ const Navbar = () => {
   
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const { loggedIn } = useSelector(store => store.kidsReducer)
+	const { loggedIn, parent_loggedIn } = useSelector(store => store.kidsReducer)
 	
 	const logout = () => {		
       fetch("/logout", { method: "DELETE" }).then(() => {
 			dispatch(logoutCurrentKid()) 
+      })
+      navigate('/about')
+	}
+
+	const logoutParent = () => {		
+      fetch("/logout_parent", { method: "DELETE_PARENT" }).then(() => {
+			dispatch(logoutCurrentParent()) 
       })
       navigate('/about')
 	}
@@ -29,19 +37,19 @@ const Navbar = () => {
 
       <div className="hidden md:flex items-center">
         <ul className="flex gap-4 text-white font-bold">
-          {loggedIn ? (<li className="rounded-md bg-purple-400 p-2"><Link to="/new_quiz">Earn Allowance</Link></li>) : (<li className="rounded-md bg-purple-400 p-2"><Link to="/">Home</Link></li>)}
-          {loggedIn ? (<li className="rounded-md bg-red-400 p-2"><Link to="/me">My Wallet</Link></li>) : (<li className="rounded-md bg-red-400 p-2"><Link to="/about">About</Link></li>)}
-          {loggedIn ? (<li className="rounded-md bg-yellow-400 p-2"><Link to="/wallet">Munchkins</Link></li>) : (<li className="rounded-md bg-yellow-400 p-2"><Link to="/explore">Explore</Link></li>)}        
+          {loggedIn ? (<li className="rounded-md bg-purple-400 p-2"><Link to="/new_quiz">Earn Allowance</Link></li>) : parent_loggedIn ? (<li className="rounded-md bg-purple-400 p-2"><Link to="/allowances/new">New Allowance</Link></li>) : (<li className="rounded-md bg-purple-400 p-2"><Link to="/">Home</Link></li>)}
+          {loggedIn ? (<li className="rounded-md bg-red-400 p-2"><Link to="/me">My Wallet</Link></li>) : parent_loggedIn ? (<li className="rounded-md bg-purple-400 p-2"><Link to="/my_kids_wallet">My Kid's Wallet</Link></li>) : (<li className="rounded-md bg-red-400 p-2"><Link to="/about">About</Link></li>)}
+          {loggedIn ? (<li className="rounded-md bg-yellow-400 p-2"><Link to="/wallet">Munchkins</Link></li>) : parent_loggedIn ? (<li className="rounded-md bg-purple-400 p-2"><Link to="/wallet">B-Clever Kids</Link></li>) : (<li className="rounded-md bg-yellow-400 p-2"><Link to="/explore">Explore</Link></li>)}        
         </ul>
       </div>
 
       <div className="hidden lg:flex gap-4">
-      {loggedIn ? (<button onClick={logout} className="flex justify-center rounded-md items-center bg-transparent px-3 py-2 bg-yellow-200 font-bold">Log Out</button>) : (<Link to="/login" className="flex justify-center rounded-md items-center bg-transparent px-3 py-2 bg-yellow-200 font-bold">
+      {loggedIn || parent_loggedIn ? (<button onClick={parent_loggedIn ? logoutParent : logout} className="flex justify-center rounded-md items-center bg-transparent px-3 py-2 bg-yellow-200 font-bold">Log Out</button>) : (<Link to="/login" className="flex justify-center rounded-md items-center bg-transparent px-3 py-2 bg-yellow-200 font-bold">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
             </svg>
             Login</Link>)}
-        { loggedIn ? null : (<Link to="/signup" className="px-3 py-2 bg-green-300 rounded-md font-semibold">Sign Up</Link>) }
+        { loggedIn || parent_loggedIn ? null : (<Link to="/signup" className="px-3 py-2 bg-green-300 rounded-md font-semibold">Sign Up</Link>) }
       </div>
       <div className="md:hidden" onClick={handleClick}>
         {toggle ? (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -54,16 +62,16 @@ const Navbar = () => {
       </div>
       <div className={ toggle ? 'absolute z-10 p-4 bg-white w-full px-3 md:hidden' : 'hidden' }>
       <ul>
-        {loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/new_quiz">Earn Allowance</Link></li>) : (<li className="p-2 hover:bg-green-200"><Link to="/">Home</Link></li>)}
-        {loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/me">My Wallet</Link></li>) : (<li className="p-2 hover:bg-green-200"><Link to="/about">About</Link></li>)}
-        {loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/wallet">Munchkins</Link></li>) : (<li className="p-2 hover:bg-green-200"><Link to="/explore">Explore</Link></li>)}
+        {loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/new_quiz">Earn Allowance</Link></li>) : parent_loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/allowances/new">New Allowance</Link></li>) : (<li className="p-2 hover:bg-green-200"><Link to="/">Home</Link></li>)}
+        {loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/me">My Wallet</Link></li>) : parent_loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/my_kids_wallet">My Kid's Wallet</Link></li>) : (<li className="p-2 hover:bg-green-200"><Link to="/about">About</Link></li>)}
+        {loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/wallet">Munchkins</Link></li>) : parent_loggedIn ? (<li className="p-2 hover:bg-green-200"><Link to="/wallet">B-Clever Kids</Link></li>) : (<li className="p-2 hover:bg-green-200"><Link to="/explore">Explore</Link></li>)}
           <div className="flex my-4 gap-4">
             {loggedIn ? (<Link onClick={logout} to="/about" className="flex justify-center rounded-md items-center bg-transparent px-3 py-2 bg-yellow-200 font-bold">Log Out</Link>) : (<Link to="/login" className="flex justify-center rounded-md items-center bg-transparent px-3 py-2 bg-yellow-200 font-bold">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
             </svg>
             Login</Link>)}
-            { loggedIn ? null : (<Link to="/signup" className="px-3 py-2 bg-green-300 rounded-md font-semibold">Sign Up</Link>) }            
+            { loggedIn || parent_loggedIn ? null : (<Link to="/signup" className="px-3 py-2 bg-green-300 rounded-md font-semibold">Sign Up</Link>) }            
           </div>
         </ul>
       </div>

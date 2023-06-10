@@ -6,7 +6,7 @@ import Main from "./pages/Main"
 import ParentDashboard from './pages/ParentDashboard'
 import NewAllowanceForm from "./forms/NewAllowanceForm"
 import EditAllowanceForm from './forms/EditAllowanceForm'
-import ParentList from "./components/ParentList"
+import EditKidAllowanceForm from './forms/EditKidAllowanceForm'
 import Wallet from "./layouts/Wallet"
 import MyKidsWallet from "./layouts/MyKidsWallet"
 import NotFound from "./pages/NotFound"
@@ -14,7 +14,7 @@ import Profile from "./pages/Profile"
 import { useEffect } from "react"
 import { loadKids, loadCurrentKid } from './redux/action/kidsAction'
 import { loadParents } from './redux/action/parentAuthAction'
-import { loadAllowances } from './redux/action/allowanceAction'
+import { loadAllowances, loadKidAllowances } from './redux/action/allowanceAction'
 import { loadQuiz } from "./redux/action/quizAction"
 import QuizScreen from "./pages/QuizScreen"
 import Home from "./pages/Home"
@@ -66,13 +66,13 @@ import Explore from "./pages/Explore"
           element: <EditAllowanceForm />,          
           errorElement: <NotFound />,
           // action:
-        },
+        },       
         {                
-          path: "parents",
-          element: <ParentList />,
+          path: "kid_allowances/:id/edit",
+          element: <EditKidAllowanceForm />,          
           errorElement: <NotFound />,
           // action:
-        },
+        },       
         {        
           path: "explore",
           element: <Explore />,
@@ -122,6 +122,7 @@ import Explore from "./pages/Explore"
       dispatch(loadParents())    
       dispatch(loadQuiz()) 
       dispatch(loadAllowances())
+      dispatch(loadKidAllowances())
     },[dispatch])
 
     return (

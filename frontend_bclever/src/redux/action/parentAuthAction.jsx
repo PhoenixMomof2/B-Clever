@@ -81,6 +81,6 @@ export const signupParent = ({parent, kid, allowance}) => {
 export const logoutCurrentParent = () => {  
   // NOT USING THUNK - NO FETCH IN THIS ACTION
   return {
-    type: "LOGOUT"
+    type: "LOGOUT_PARENT"
   }  
 } 
