@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import cmlogo from '../images/cmlogo.jpg'
 import { useDispatch } from "react-redux"
 import { signupParent } from '../redux/action/parentAuthAction';
-import { clearErrors } from '../redux/action/errorsAction'
+import { clearErrors } from '../redux/action/errorsAction';
 // import Errors from '../errors/Errors'
 
 const Signup = () => {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [parent_name, setParentName] = useState("")
   const [parent_age, setParentAge] = useState("")
@@ -27,25 +27,32 @@ const Signup = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault()
-    
-    const kid = {
-      name, age, grade, avatar, password: kid_password, password_confirmation: kid_passwordConfirmation
-    }
-  
+
     const parent = {
-      name: parent_name, age: parent_age, state: parent_state, password: password, password_confirmation: passwordConfirmation
+      name: parent_name, age: parent_age, state: parent_state, password, password_confirmation: passwordConfirmation,      
     }
-    
+    console.log(parent, "parent")
+
+    const kid = {
+      kid_attributes: {
+        name,
+        age,
+        grade,
+        avatar,
+        password: kid_password,
+        password_confirmation: kid_passwordConfirmation
+      }
+    }
+    console.log(kid, "kid")
+     
     const allowance = {
       balance: balance,
-      kid_id: kid.id,
-      parent_id: parent.id
     }
-    console.log(allowance, "allowance")
-    dispatch(signupParent({parent: parent, kid: kid, allowance: allowance}))    
-    navigate('/login')     
-  }
-         
+    console.log(allowance, "allowance")      
+
+    dispatch(signupParent(parent, kid, allowance, navigate))  
+  } 
+           
     useEffect(() => {
       return () => {
         dispatch(clearErrors())          

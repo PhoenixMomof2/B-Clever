@@ -23,7 +23,6 @@ const EditKidAllowanceForm = () => {
     
     const editedAllowance = {
       allowance: {
-        id: allowance_to_edit.id,
         balance: parseFloat(balance),
         kid_id: kid_to_edit.id,
         parent_id: currentParent.id

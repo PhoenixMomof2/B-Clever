@@ -8,7 +8,7 @@ const ParentAllowanceCard = ({allowance, thisKid}) => {
   
   const handleDeleteClick = () => {
     dispatch(deleteParentAllowance(allowance.id))
-  }
+   }
 
     return (
       <div className="bg-white overflow-hidden shadow-xl rounded-2xl ">       

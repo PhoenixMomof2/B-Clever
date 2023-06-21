@@ -26,29 +26,26 @@ const kidsReducer = (state=initialState, action) => {
         ...state,
         kid_allowances: action.payload, 
       }
+    case "SIGNUP_KID":
+      return {
+        ...state,
+        currentKid: action.payload,
+        kids: [...state.kids, action.payload]
+      }
     case "LOGIN":
       return {
         ...state,
         currentKid: action.payload,
         allowances: action.payload.allowances,        
         loggedIn: true          
-      } 
-    case "ADD_KID":
-      return {
-        ...state, 
-        kids: [...state.kids, action.payload],
-        currentKid: action.payload      
       }
-    case "SIGNUP":
-      return {
-        ...state,
-        currentKid: action.payload
-      }          
     case "LOGOUT":
       return {
         ...state,
-        currentKid: initialState.currentKid,
-        loggedIn: false,       
+        currentKid: {},
+        loggedIn: false,   
+        allowances:[],  
+        kid_allowances: [],
         }          
     case "ADD_ALLOWANCE":
       const updatedAllowances = [...state.allowances, action.payload]
@@ -78,14 +75,14 @@ const kidsReducer = (state=initialState, action) => {
       const updatedKids = state.kids.map((kid) => kid.id === updatedParentKid.id ? updatedParentKid : kid)
       return {...state, kid_allowances: updatedKidAllowances, currentKid: updatedParentKid, kids: updatedKids}    
     case "EDIT_PARENT_ALLOWANCE":
-      const parent_kid = state.kids.find(kid => kid.id === action.payload.kid_id)
+      const parent_kid = state.kids.find(kid => kid.id === action.payload.kid.id)
       console.log(action.payload, "EDIT_PARENT_ALLOWANCE")
       const editedParentAllowances = parent_kid.allowances.map(allowance => allowance.id === action.payload.id ? action.payload : allowance)
       const editedParentKid = {...parent_kid, allowances: editedParentAllowances, wallet_total: action.payload.kid.wallet_total }
       const updated_Parent_Kids = state.kids.map((kid) => kid.id === editedParentKid.id ? editedParentKid : kid)
       return {...state, kid_allowances: editedParentAllowances, currentKid: editedParentKid, kids: updated_Parent_Kids} 
     case "DELETE_PARENT_ALLOWANCE":
-      const pKid = state.currentParent.kids[0]
+      const pKid = state.kids.find(kid => kid.id === state.currentParent.kids[0].id)
       const deletedParentAllowance = state.kid_allowances.find(allowance => allowance.id === action.payload)
       const filteredParentAllowances = state.kid_allowances.filter(allowance => allowance.id !== deletedParentAllowance.id)
       const updatedWalletTotalAfterDelete = pKid.wallet_total - deletedParentAllowance.balance    
@@ -94,8 +91,8 @@ const kidsReducer = (state=initialState, action) => {
         allowances: filteredParentAllowances,
         wallet_total: updatedWalletTotalAfterDelete
       }
-      const updated_kids_after_delete = state.kids.map((kid) => kid.id === updatedKidAfterParentDelete.id ? updatedKidAfterParentDelete : kid)
-      return {...state, kid_allowances: filteredParentAllowances, currentKid: updatedKidAfterParentDelete, kids: updated_kids_after_delete}   
+      const updated_kids_after_delete = state.kids.map((kid) => kid.id === updatedKidAfterParentDelete.id ? updatedKidAfterParentDelete : kid)     
+      return {...state, kid_allowances: filteredParentAllowances, kids: updated_kids_after_delete}   
     case "LOAD_PARENTS":
       return {
         ...state,
@@ -105,27 +102,21 @@ const kidsReducer = (state=initialState, action) => {
       return {
         ...state,
         currentParent: action.payload,
-        parent_loggedIn: true          
+        parent_loggedIn: true,
     } 
-    case "ADD_PARENT":
-      return {
-        ...state, 
-        parents: [...state.parents, action.payload],
-        currentParent: action.payload
-    }
     case "SIGNUP_PARENT":
       return {
         ...state,
-        currentParent: action.payload.parent,
-        parents: [...state.parents, action.payload.parent],
-        kids: [...state.kids, action.payload.kid],
-        allowances: [...state.allowances, action.payload.allowance]                
+        currentParent: action.payload,
+        parents: [...state.parents, action.payload],                   
     }          
     case "LOGOUT_PARENT":
       return {
         ...state,
-        currentParent: initialState.currentParent, 
-        parent_loggedIn: false,       
+        currentParent: {}, 
+        parent_loggedIn: false, 
+        allowances:[],  
+        kid_allowances: [],      
       };
     default: 
       return state
