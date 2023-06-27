@@ -1,7 +1,6 @@
 class AllowancesController < ApplicationController
   before_action :find_allowance, only: [:show, :update, :destroy]
   skip_before_action :authorize_kid, only: [:create, :parent_allowances, :kid_allowances, :update_parent_allowance, :destroy_parent_allowance]
-  # skip_before_action :authorize_parent
 
   # GET /allowances 
   def index          

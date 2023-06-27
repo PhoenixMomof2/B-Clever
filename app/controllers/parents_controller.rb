@@ -1,6 +1,6 @@
 class ParentsController < ApplicationController
   skip_before_action :authorize_parent, only: [:create, :index]
-  skip_before_action :authorize_kid, only: [:create, :index, :show, :create_allowance]
+  skip_before_action :authorize_kid, only: [:create, :index, :create_allowance]
   
   #Sign up parent and their kid
   def create
@@ -21,7 +21,7 @@ class ParentsController < ApplicationController
         render json: { errors: ["Kid name is blank."] }, status: :unprocessable_entity
         raise ActiveRecord::Rollback
       end
-      # parent_params_with_kids = parent_params.merge(kids: [kid])
+
       parent = Parent.create!(parent_params)
       # byebug
   
@@ -39,12 +39,6 @@ class ParentsController < ApplicationController
       render json: merge_data, status: :created
     end
   end
-  
-  # def create
-  #   parent = Parent.create!(parent_params)
-  #   session[:parent_id] = parent.id
-  #   render json: parent, status: 201
-  # end
    
   # GET /parents
   def index 
@@ -61,5 +55,3 @@ class ParentsController < ApplicationController
     params.require(:parent).permit(:name, :password, :password_confirmation, :age, :state)
   end
 end
-
-#kid_attributes: [:name, :age, :grade, :avatar, :password, :password_confirmation]

@@ -4,7 +4,6 @@ import cmlogo from '../images/cmlogo.jpg'
 import { useDispatch } from 'react-redux';
 import { loginCurrentKid } from '../redux/action/kidsAction'
 import { loginCurrentParent } from '../redux/action/parentAuthAction'
-
 import { clearErrors } from '../redux/action/errorsAction'
 // import Errors from '../errors/Errors';
 
@@ -23,8 +22,6 @@ const Login = () => {
     e.preventDefault()
     const handleKidSubmit = () => dispatch(loginCurrentKid({name, password}, navigate))
     const handleParentSubmit = () => dispatch(loginCurrentParent({name, password}, navigate))
-    console.log(isChecked)
-    // debugger
     const submitForm = () => { isChecked ? handleParentSubmit() : handleKidSubmit() }  
     
     submitForm()     
@@ -74,7 +71,9 @@ return (
               Login
             </button>
           </div>
-          {/* <Errors /> */}
+          {/* <div>
+            <Errors />
+          </div> */}
         </form>
       </div>
     </div>
