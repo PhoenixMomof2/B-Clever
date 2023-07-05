@@ -43,15 +43,15 @@ const MyKidsWallet = () => {
   return (
     <div className="w-full bg-slate-300 py-12 border-transparent rounded-2xl shadow-xl">
     <h1 className="font-semibold text-4xl text-center pb-6 border-b text-green-400">{thisKid.name}'s Wallet</h1>          
-    <div className="md:max-w-[1480px] max-w-[600px] m-auto grid md:grid-cols-2">
+    <div className="md:max-w-[1480px] sm:max-w-[600px] m-auto grid md:grid-cols-2">
       <div className="uppercase text-center text-gray-800 p-2 bg-white ">          
-            <h1 className="font-bold uppercase text-gray-600 text-center">{thisKid.name}'s has ${thisKid.wallet_total} in his wallet</h1>          
-            <Doughnut data={data}/>    
-          </div>
-          <Slider {...settings}>
-           {thisKid.allowances.map((allowance) => (
-              <ParentAllowanceCard key={allowance.id} allowance={allowance} thisKid={thisKid}/> 
-            ))}
+        <h1 className="font-bold uppercase text-gray-600 text-center">{thisKid.name}'s has ${thisKid.wallet_total} in his wallet</h1>          
+         <Doughnut data={data}/>               
+      </div>
+        <Slider {...settings}>
+          {thisKid.allowances.map((allowance) => (
+            <ParentAllowanceCard key={allowance.id} allowance={allowance} thisKid={thisKid}/> 
+          ))}
         </Slider>
       </div>
     </div>

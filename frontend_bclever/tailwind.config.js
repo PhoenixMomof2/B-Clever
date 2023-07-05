@@ -15,6 +15,9 @@ module.exports = {
       },
       fontFamily: {
         body: ['Nunito']
+      },
+      animation: {
+        'spin-slow': 'spin 6s linear infinite',
       }
     },
   },
@@ -22,8 +25,8 @@ module.exports = {
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
-    require('flowbite')
-  // Custom styles added here],
-  ],
+    require('flowbite'),
+    require("daisyui")
+   ],
 }
 

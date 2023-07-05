@@ -43,7 +43,7 @@ const Navbar = () => {
         </ul>
       </div>
 
-      <div className="hidden lg:flex gap-4">
+      <div className="hidden md:flex lg:flex gap-4">
       {loggedIn || parent_loggedIn ? (<button onClick={parent_loggedIn ? logoutParent : logout} className="flex justify-center rounded-md items-center bg-transparent px-3 py-2 bg-yellow-200 font-bold">Log Out</button>) : (<Link to="/login" className="flex justify-center rounded-md items-center bg-transparent px-3 py-2 bg-yellow-200 font-bold">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />

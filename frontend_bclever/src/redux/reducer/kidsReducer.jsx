@@ -40,14 +40,11 @@ const kidsReducer = (state=initialState, action) => {
         loggedIn: true          
       }
     case "LOGOUT":
-      return initialState
-      // {
-      //   ...state,
-      //   currentKid: {},
-      //   loggedIn: false,   
-        // allowances:[],  
-        // kid_allowances: [],
-        // }          
+      return {
+        currentKid: {},
+        loggedIn: false, 
+        currentParent: {}, 
+      }          
     case "ADD_ALLOWANCE":
       const updatedAllowances = [...state.allowances, action.payload]
       const updatedKid = {...state.currentKid, allowances: updatedAllowances, wallet_total: action.payload.kid.wallet_total }
@@ -117,8 +114,7 @@ const kidsReducer = (state=initialState, action) => {
         currentParent: {}, 
         parent_loggedIn: false, 
         currentKid: {},
-      };
-      // initialState
+      };   
     default: 
       return state
   }

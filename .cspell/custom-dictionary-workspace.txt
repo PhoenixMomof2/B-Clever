@@ -1,6 +1,7 @@
 # Custom Dictionary Words
 actioncable
 chartjs
+daisyui
 dropdownlist
 excalidraw
 littleguywriting

@@ -11,7 +11,7 @@ const Main = () => {
   return (
     <>
       { currentKid ? <Navbar /> : <ParentNavbar/> }
-      <main>       
+      <main className="w-full min-h-screen p-8"> 
         <Outlet />  
       </main>    
       <Footer />
