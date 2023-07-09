@@ -11,7 +11,7 @@ const randomNumberBetween = (min, max) => {
 }
 
 const QuizScreen = () => {    
-  const [timeLeft, setTimeLeft] = useState(75)
+  const [timeLeft, setTimeLeft] = useState(20)
   const timeLeftRef = useRef(15)
   const intervalIdRef = useRef(null)
   const [intervalId, setIntervalId] = useState(null)
@@ -29,56 +29,56 @@ const QuizScreen = () => {
   const [score, setScore] = useState(0)
   const scoreRef = useRef(0)
   
-  const [scope, animate] = useAnimate()
+  // const [scope, animate] = useAnimate()
 
   const startQuiz = () => {
-    const sparkles = Array.from({ length: 20 });
-    const sparklesAnimation = sparkles.map((_, index) => [
-      `.sparkle-${index}`,
-      {
-        x: randomNumberBetween(-100, 100),
-        y: randomNumberBetween(-100, 100),
-        scale: randomNumberBetween(1.5, 2.5),
-        opacity: 1,
-      },
-      {
-        duration: 0.4,
-        at: "<",
-      },
-    ]);
+    // const sparkles = Array.from({ length: 20 });
+    // const sparklesAnimation = sparkles.map((_, index) => [
+    //   `.sparkle-${index}`,
+    //   {
+    //     x: randomNumberBetween(-100, 100),
+    //     y: randomNumberBetween(-100, 100),
+    //     scale: randomNumberBetween(1.5, 2.5),
+    //     opacity: 1,
+    //   },
+    //   {
+    //     duration: 0.4,
+    //     at: "<",
+    //   },
+    // ]);
 
-    const sparklesFadeOut = sparkles.map((_, index) => [
-      `.sparkle-${index}`,
-      {
-        opacity: 0,
-        scale: 0,
-      },
-      {
-        duration: 0.3,
-        at: "<",
-      },
-    ]);
+    // const sparklesFadeOut = sparkles.map((_, index) => [
+    //   `.sparkle-${index}`,
+    //   {
+    //     opacity: 0,
+    //     scale: 0,
+    //   },
+    //   {
+    //     duration: 0.3,
+    //     at: "<",
+    //   },
+    // ]);
 
-    const sparklesReset = sparkles.map((_, index) => [
-      `.sparkle-${index}`,
-      {
-        x: 0,
-        y: 0,
-      },
-      {
-        duration: 0.000001,
-      },
-    ]);
+    // const sparklesReset = sparkles.map((_, index) => [
+    //   `.sparkle-${index}`,
+    //   {
+    //     x: 0,
+    //     y: 0,
+    //   },
+    //   {
+    //     duration: 0.000001,
+    //   },
+    // ]);
 
-    animate([
-      ...sparklesReset,
-      [".letter", { y: -32 }, { duration: 0.2, delay: stagger(0.05) }],
-      ["button", { scale: 0.8 }, { duration: 0.1, at: "<" }],
-      ["button", { scale: 1 }, { duration: 0.1 }],
-      ...sparklesAnimation,
-      [".letter", { y: 0 }, { duration: 0.000001 }],
-      ...sparklesFadeOut,
-    ])
+    // animate([
+    //   ...sparklesReset,
+    //   [".letter", { y: -32 }, { duration: 0.2, delay: stagger(0.05) }],
+    //   ["button", { scale: 0.8 }, { duration: 0.1, at: "<" }],
+    //   ["button", { scale: 1 }, { duration: 0.1 }],
+    //   ...sparklesAnimation,
+    //   [".letter", { y: 0 }, { duration: 0.000001 }],
+    //   ...sparklesFadeOut,
+    // ])
   
     const id = setInterval(() => {countdown()}, 1000)
     setIntervalId(id)
@@ -149,8 +149,9 @@ const QuizScreen = () => {
     }  
 
   const StartButton = () => {
+    //ref={scope} className="animate"
     return (     
-      <div ref={scope} className="animate">
+      <div >
         <button id="startButton" className="rounded-full border-2 border-green-500 px-6 py-2 text-2xl text-green-500 transition-colors hover:bg-green-200" onClick={startQuiz}>
           <span className="sr-only">Start</span>
           <span className="h-8 block overflow-hidden" aria-hidden>

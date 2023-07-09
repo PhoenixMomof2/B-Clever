@@ -1,23 +1,20 @@
 import { useSelector } from 'react-redux'
-// import { toast } from "react-toastify"
 import { Fragment, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Dialog, Transition } from '@headlessui/react'
 import littleguywriting from '../images/littleguywriting.jpg'
 
 const ParentDashboard = () => {
-  const { currentParent } = useSelector(store => store.kidsReducer  )
+  const { currentParent } = useSelector(store => store.kidsReducer)
   const navigate = useNavigate()
-
-  console.log(currentParent)
   const [open, setOpen] = useState(true)
-
   const cancelButtonRef = useRef(null)
 
   const handleCloseAndNavigate = () => {
     setOpen(false)
     navigate('/my_kids_wallet')
   }
+
   const handleClick = () => {
     setOpen(false)
     navigate('/allowances/new')

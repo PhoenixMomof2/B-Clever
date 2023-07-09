@@ -10,7 +10,7 @@ class ApplicationController < ActionController::API
   def current_kid
     @current_kid = Kid.find_by_id(session[:kid_id])  
   end
-
+  
   def current_parent
     @current_parent = Parent.find_by_id(session[:parent_id])
   end

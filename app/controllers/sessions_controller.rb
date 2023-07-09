@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
-  skip_before_action :authorize_kid, only: [:create, :login_parent]
-  skip_before_action :authorize_parent, only: [:create, :login_parent]
+  skip_before_action :authorize_kid, only: [:login_kid, :login_parent, :logout_parent]
+  skip_before_action :authorize_parent, only: [:login_kid, :login_parent, :logout_kid]
 
   # Login Kid
-  def create    
+  def login_kid    
     kid = Kid.find_by(name: params[:name])
     if kid&.authenticate(params[:password])
       session[:kid_id] = kid.id
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
   end
 
   # Logout Kid
-  def destroy
+  def logout_kid
     session.delete :kid_id
     head :no_content
   end

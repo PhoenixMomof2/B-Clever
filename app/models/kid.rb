@@ -3,7 +3,7 @@ class Kid < ApplicationRecord
   validates :age, :avatar, :grade, presence: true
   validates :password, length: { in: 6..12 }
   
-  has_many :allowances
+  has_many :allowances, dependent: :destroy
   has_many :parents, through: :allowances
   
   has_secure_password  

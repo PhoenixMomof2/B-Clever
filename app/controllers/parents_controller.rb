@@ -1,9 +1,9 @@
 class ParentsController < ApplicationController
-  skip_before_action :authorize_parent, only: [:create, :index]
-  skip_before_action :authorize_kid, only: [:create, :index, :create_allowance]
+  skip_before_action :authorize_parent, only: [:signup_parent_kid, :index]
+  skip_before_action :authorize_kid, only: [:signup_parent_kid, :index, :show]
   
   #Sign up parent and their kid
-  def create
+  def signup_parent_kid
     parent = nil
     kid = nil
   
@@ -23,15 +23,11 @@ class ParentsController < ApplicationController
       end
 
       parent = Parent.create!(parent_params)
-      # byebug
-  
-      session[:parent_id] = parent.id
-      session[:kid_id] = kid.id
+      
     end
   
     if parent
       allowance = parent.allowances.create!(balance: params[:allowance][:balance], kid_id: kid.id)
-      # byebug
       pa = ActiveModelSerializers::SerializableResource.new(parent, adapter: :json).as_json
       k = ActiveModelSerializers::SerializableResource.new(kid, adapter: :json).as_json
       a = ActiveModelSerializers::SerializableResource.new(allowance, adapter: :json).as_json

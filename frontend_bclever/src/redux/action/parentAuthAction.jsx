@@ -69,10 +69,8 @@ export const signupParent = (parent, kid, allowance, navigate) => {
         if (data.errors) {
           dispatch(setErrors(data.errors))  
         } else {
-        dispatch({ type: "SIGNUP_PARENT", payload: data.parent })     
-        dispatch({ type: "SIGNUP_KID", payload: data.kid })    
+        dispatch({ type: "SIGNUP_PARENT", payload: data })  
         dispatch({ type: "LOGIN_PARENT", payload: data.parent }) 
-        dispatch({ type: "ADD_PARENT_ALLOWANCE", payload: data.allowance })            
         navigate("/my_kids_wallet")           
       }
     })   
@@ -80,8 +78,5 @@ export const signupParent = (parent, kid, allowance, navigate) => {
 }
 
 export const logoutCurrentParent = () => {  
-  // NOT USING THUNK - NO FETCH IN THIS ACTION
-  return {
-    type: "LOGOUT_PARENT"
-  }  
+  return {type: "LOGOUT_PARENT"}  
 } 

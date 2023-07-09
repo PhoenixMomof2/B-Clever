@@ -9,14 +9,14 @@ const EditKidAllowanceForm = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const dispatch = useDispatch()
-  const { currentParent, kid_allowances, kids } = useSelector(store => store.kidsReducer)
-  const pKid = currentParent.kids[0]
-  const allowance_to_edit = kid_allowances.find(allowance => allowance.id === parseInt(id))
-  const kid_to_edit = kids.find(kid => kid.id === pKid.id)
+  const { currentParent, kids } = useSelector(store => store.kidsReducer)
+  const pKid = kids.find(kid => kid.id === currentParent.kids[0].id)
+  // debugger
+  const allowance_to_edit = pKid.allowances.find(allowance => allowance.id === parseInt(id))
   const [balance, setBalance] = useState(allowance_to_edit.balance)
 
   console.log(allowance_to_edit, "allowance_to_edit")
-  console.log(kid_to_edit, "kid")
+  console.log(pKid, "kid")
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -24,7 +24,7 @@ const EditKidAllowanceForm = () => {
     const editedAllowance = {
       allowance: {
         balance: parseFloat(balance),
-        kid_id: kid_to_edit.id,
+        kid_id: pKid.id,
         parent_id: currentParent.id
       }
     }

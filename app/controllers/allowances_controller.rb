@@ -1,7 +1,8 @@
 class AllowancesController < ApplicationController
   before_action :find_allowance, only: [:show, :update, :destroy]
-  skip_before_action :authorize_kid, only: [:create, :parent_allowances, :kid_allowances, :update_parent_allowance, :destroy_parent_allowance]
-
+  skip_before_action :authorize_kid, only: [:create, :kid_allowances, :parent_allowances, :update_parent_allowance, :destroy_parent_allowance]
+  skip_before_action :authorize_parent, only: [:index, :create, :update, :destroy]
+  
   # GET /allowances 
   def index          
     render json: current_kid.allowances, status: :ok
@@ -24,11 +25,6 @@ class AllowancesController < ApplicationController
     render json: @allowance, status: :created   
   end
   
-  # SHOW /allowances/:id
-  def show
-    render json: @allowance, status: :ok
-  end
-
   # PATCH /allowances/:id 
   def update          
     @allowance.update!(allowance_params)
@@ -43,7 +39,6 @@ class AllowancesController < ApplicationController
 
   # PATCH /kid_allowances/:id 
   def update_parent_allowance     
-    # byebug
     @allowance = @current_parent.allowances.find_by_id(params[:id]) 
     @allowance.update!(allowance_params)
     render json: @allowance, status: :accepted      

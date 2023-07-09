@@ -13,8 +13,6 @@ const EditAllowanceForm = () => {
   const allowance_to_edit = allowances.find(allowance => allowance.id === parseInt(id))
   const [balance, setBalance] = useState(allowance_to_edit.balance)
 
- console.log(allowance_to_edit, "allowance_to_edit")
-
   const handleSubmit = (e) => {
     e.preventDefault()
     

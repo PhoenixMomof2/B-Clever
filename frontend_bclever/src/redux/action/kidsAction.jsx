@@ -17,16 +17,14 @@ export const loadKids = () => {
   }
 } 
 
-export const loadCurrentKid = () => { 
- 
-  return dispatch => {
-   
+export const loadCurrentKid = () => {  
+  return dispatch => {   
       fetch('/me')
       .then(res => res.json())
       .then(data => {
         if(!data.errors){
-          const action = { type: "LOGIN", payload: data }
-          // console.log(data, "Current Kid")
+          const action = { type: "LOAD_CURRENT_KID", payload: data }
+          console.log(data, "Current Kid")
           dispatch(action)
         } else {
           dispatch(setErrors(data.errors))
@@ -38,7 +36,7 @@ export const loadCurrentKid = () => {
 export const loginCurrentKid = (kid, navigate) => { 
   return dispatch => {
     // asynchronous calls    
-    fetch('/login', {
+    fetch('/login_kid', {
       method: "POST",
       headers,
       body: JSON.stringify(kid)
@@ -48,7 +46,7 @@ export const loginCurrentKid = (kid, navigate) => {
       if (data.errors) {
         dispatch(setErrors(data.errors))    
       } else {
-        const action = { type: "LOGIN", payload: data }
+        const action = { type: "LOGIN_KID", payload: data }
         dispatch(action)
         dispatch(clearErrors())
         navigate("/me") 
@@ -57,28 +55,6 @@ export const loginCurrentKid = (kid, navigate) => {
   }
 } 
 
-export const signupKid = (kid) => { 
-  return dispatch => {
-    // asynchronous calls    
-    fetch('/signup', {
-      method: "POST",
-      headers,
-      body: JSON.stringify(kid)
-      })
-      .then(res => res.json())
-      .then((data) => {
-      if (data.errors) {
-        dispatch(setErrors(data.errors))    
-      } else {
-        const action = { type: "SIGNUP_KID", payload: data }
-        dispatch(action)
-        dispatch(clearErrors())
-      }
-    });  
-  }
-} 
-
 export const logoutCurrentKid = () => {  
-  // NOT USING THUNK - NO FETCH IN THIS ACTION
-  return { type: "LOGOUT" }  
+  return {type: "LOGOUT_KID"}  
 } 

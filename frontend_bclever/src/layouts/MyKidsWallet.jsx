@@ -7,12 +7,11 @@ import ParentAllowanceCard from '../pages/ParentAllowanceCard'
 
 const MyKidsWallet = () => {
 
-  const { currentParent, kids } = useSelector(store => store.kidsReducer)
+  const { currentParent } = useSelector(store => store.kidsReducer)
+  const kids = useSelector(store => store.kidsReducer.kids)
   const parentKid = currentParent.kids[0]
   const thisKid = kids.find(kid => kid.id === parentKid.id)
   const [wallet, setWallet] = useState(thisKid.wallet_total)
-  console.log(currentParent, thisKid, "thisKid")
-  console.log(thisKid.allowances, "allowances")
 
   const savings = (wallet * 0.30).toFixed(2)
   const wants = (wallet * 0.25).toFixed(2)    
@@ -57,5 +56,4 @@ const MyKidsWallet = () => {
     </div>
   )
 }
-
 export default MyKidsWallet
