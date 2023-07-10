@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect, useCallback } from "react"
 import timer_text from '../images/timer_text.png'
 import { addAllowance } from '../redux/action/allowanceAction'
 import { addResource, updateResourceCollection } from "../context/Globals"
@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 const Timer = () => {
-  debugger
+  // debugger
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const currentKid = useSelector(store => store.kidsReducer.currentKid)
@@ -28,7 +28,7 @@ const Timer = () => {
     return { minutes, seconds }
   }
 
-  const countdown = () => {
+  const countdown = useCallback(() => {
     const newBalance = scoreRef.current * 1.50
     if (timeLeftRef.current > 0) {
       setTimeLeft(timeLeft => timeLeft - 1)
@@ -51,7 +51,7 @@ const Timer = () => {
       clearInterval(intervalIdRef.current)
     }
     formatTime(timeLeftRef.current)
-  }
+  }, [currentKid, navigate, dispatch]);
 
   useEffect(() => {
     timeLeftRef.current = timeLeft

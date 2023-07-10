@@ -1,25 +1,27 @@
 import React, { useState, useRef } from 'react'
+import { useSelector } from 'react-redux';
 
-export const goToNextQuestion = (setNextQuestion, setIdx) => {
-  setIdx(idx+1)
-  setNextQuestion(questions[idx+1])      
-}
 
-export const optionClicked = (correct) => {
-  if (correct === true) {
-    setScore(score + 1)  
-    goToNextQuestion()
-  } else {
-    goToNextQuestion()
-    setScore(score)
-  }     
-}  
-
-export const QuizQuestion = (optionClicked) => {
+export const QuizQuestion = ({optionClicked}) => {
   const { questions } = useSelector(gameState => gameState.quizReducer)
   const indexRef = useRef(0)
   const [idx, setIdx] = useState(0)
   const [nextQuestion, setNextQuestion] = useState(questions[idx])
+  
+  const goToNextQuestion = () => {
+    setIdx(idx+1)
+    setNextQuestion(questions[idx+1])      
+  }
+  
+  const optionClicked = (correct) => {
+    if (correct === true) {
+      setScore(score + 1)  
+      goToNextQuestion()
+    } else {
+      goToNextQuestion()
+      setScore(score)
+    }     
+  }  
 
   return (
     <div className="bg-blue=500 p-4">
