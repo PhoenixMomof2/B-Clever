@@ -6,7 +6,7 @@ const initialState = {
   parents: [],
   kid_allowances: [],
   currentParent: {},
-  parent_kid_loggedIn: false
+  parent_loggedIn: false
 }
 
 const kidsReducer = (state=initialState, action) => {
@@ -20,21 +20,21 @@ const kidsReducer = (state=initialState, action) => {
         ...state, currentParent: action.payload.parent, parents: updatedParents, 
         kid_allowances: kidAllowances, kids: newKids} 
     case "LOAD_CURRENT_KID":         
-    return {...state, currentKid: action.payload}
+      return {...state, currentKid: action.payload}
     case "LOAD_CURRENT_PARENT":         
-    return {...state, currentParent: action.payload}
+      return {...state, currentParent: action.payload}
     case "LOAD_KIDS":
       return {...state, kids: action.payload}    
     case "LOAD_PARENTS":
       return {...state, parents: action.payload}  
     case "LOAD_ALLOWANCES":
-    return {...state, allowances: action.payload}
+      return {...state, allowances: action.payload}
     case "LOAD_KID_ALLOWANCES":
       return {...state, kid_allowances: action.payload}
     case "LOGIN_KID":
       return {...state, currentKid: action.payload, allowances: action.payload.allowances, kid_loggedIn: true}
     case "LOGIN_PARENT":
-      return {...state, currentParent: action.payload, kid_allowances: action.payload.kid_allowances, parent_kid_loggedIn: true}    
+      return {...state, currentParent: action.payload, kid_allowances: action.payload.kid_allowances, parent_loggedIn: true}    
     case "ADD_ALLOWANCE":
       const updatedAllowances = [...state.allowances, action.payload]
       const updatedKid = {...state.currentKid, allowances: updatedAllowances, wallet_total: action.payload.kid.wallet_total}
